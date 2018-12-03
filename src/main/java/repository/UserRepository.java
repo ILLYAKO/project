@@ -38,7 +38,7 @@ public class UserRepository extends BaseRepository<User> {
             pstmt.setString(7,user.getUserGender());
             pstmt.setString(8,user.getUserEmail());
             pstmt.setString(9,user.getUserAddress());
-            pstmt.setString(10, user.getUserID());
+            pstmt.setString(10, user.getUserType().name());
 
             if(pstmt.executeUpdate() == 0){
                 throw new InfrastructureException("The insert wasn't executed!");

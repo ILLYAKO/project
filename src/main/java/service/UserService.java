@@ -70,11 +70,19 @@ public class UserService implements Service<User> {
                 new EntityNotFoundException("User with " + field + ": " + criteria + " was not found!"));
     }
 
-    public User login(User user) throws EntityNotFoundException {
+    public User login(User user) throws EntityNotFoundException, Exception {
         System.out.println("UserService.login user.email: " + user.getUserEmail());
         User wantedUser =  findByCriteria("user_email", user.getUserEmail());
 
-        if(  wantedUser.getUserEmail().equals(user.getUserEmail()) && wantedUser.getUserPassword().equals(user.getUserPassword())  ){
+
+
+        ProtectedConfigFile protectedConfigFile = new ProtectedConfigFile();
+        protectedConfigFile.setEncryptedPassword( wantedUser.getUserPassword());
+        String wantedUserDecrPassword = protectedConfigFile.getDecryptedPassword();
+        //
+
+
+        if(  wantedUser.getUserEmail().equals(user.getUserEmail()) && wantedUserDecrPassword.equals(user.getUserPassword())  ){
             System.out.println("UserService.login wantedUser.email: " + wantedUser.getUserEmail());
             return  wantedUser;
         }else {
