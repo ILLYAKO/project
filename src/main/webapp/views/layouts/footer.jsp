@@ -1,2 +1,2 @@
 <hr/>
-&copy; 2018 Illya.
+&copy; 2018 Illya..
