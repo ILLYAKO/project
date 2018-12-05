@@ -93,7 +93,7 @@ public class ComplaintController extends BaseController {
 
     private void listUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            List<User> listUser = service.findAll();
+            List<Complaint> listUser = service.findAll();
             request.setAttribute("listUser", listUser);
             RequestDispatcher dispatcher = request
                     .getRequestDispatcher("/pages/user/UserList.jsp");
