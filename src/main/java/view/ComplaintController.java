@@ -96,7 +96,7 @@ public class ComplaintController extends BaseController {
             List<Complaint> listComplaint = service.findAll();
             request.setAttribute("listUser", listComplaint);
             RequestDispatcher dispatcher = request
-                    .getRequestDispatcher("/pages/user/UserList.jsp");
+                    .getRequestDispatcher("/pages/user/ComplaintList.jsp");
             dispatcher.forward(request, response);
     }
 
