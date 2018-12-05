@@ -1,35 +1,32 @@
 package view;
 
+import domain.Complaint;
 import domain.User;
-
-import exception.EntityNotFoundException;
 import domain.UserType;
+import exception.EntityNotFoundException;
 import service.ProtectedConfigFile;
 import service.Service;
 import service.UserService;
 import view.util.Message;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-
 
 /**
- * Servlet implementation class UserController
+ * Servlet implementation class ComplaintController
  */
-public class UserController extends BaseController {
-    private Service<User> service;
+public class ComplaintController extends BaseController {
+    private Service<Complaint> service;
 
     public void init() {
-        service = new UserService();
+        service = new ComplaintService();
     }
 
     @Override
