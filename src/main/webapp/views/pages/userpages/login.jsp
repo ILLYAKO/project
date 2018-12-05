@@ -22,7 +22,8 @@
         <div class="title-container">
             <h1>
                 <c:if test="${isWrong}">
-                    Wrong combination email & password. OR<br>
+                    Wrong combination email & password.<br>
+                    Sorry.Try again!<br>
                 </c:if>
                 <c:if test="${isEdit}">
                     Edit User
@@ -33,8 +34,8 @@
             </h1>
         </div>
 
-        <h2>User Details</h2>
-        <form action="user/login" method="post">
+        <h2>Login. User Details</h2>
+        <form action="../user/login" method="post">
             Enter Email : <input type="text" name="userEmail"><br/>
             Enter Password : <input type="password" name ="password"><br/>
             <input type ="submit" value="Login">

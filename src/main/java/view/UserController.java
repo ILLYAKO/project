@@ -72,6 +72,9 @@ public class UserController extends BaseController {
                 case "/logout":
                     logoutUser(request, response);
                     break;
+                case "/askForLogin":
+                    askForLogin(request, response);
+                    break;
                 default:
                     askForLogin(request, response);
                     break;
@@ -85,7 +88,7 @@ public class UserController extends BaseController {
     private String extractAction(HttpServletRequest request) {
             String pathInfo = request.getPathInfo();
             if (pathInfo == null) {
-                return "list";
+                return "/askForLogin";
             } else {
                 return pathInfo;
             }
@@ -271,7 +274,8 @@ public class UserController extends BaseController {
             request.setAttribute("message", e.getMessage());
             try {
                 System.out.println("Something wrong -03 in loginUser");
-                showRegistrationForm(request, response);
+                request.setAttribute("isWrong", true);
+                askForLogin(request, response);
             } catch (ServletException e1) {
                 e1.printStackTrace();
             }
