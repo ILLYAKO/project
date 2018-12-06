@@ -4,7 +4,7 @@ public class ComplaintType {
 
     private String complaintTypeID;
     private String complaintTypeShortName;
-    private String complaintTypeFullName;
+    private static String complaintTypeFullName;
     private String complaintTypeDescription;
 
     public ComplaintType() {    }
@@ -32,7 +32,7 @@ public class ComplaintType {
         this.complaintTypeShortName = complaintTypeShortName;
     }
 
-    public String getComplaintTypeFullName() {
+    public static String getComplaintTypeFullName() {
         return complaintTypeFullName;
     }
 

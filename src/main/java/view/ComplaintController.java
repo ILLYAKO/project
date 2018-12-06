@@ -1,9 +1,11 @@
 package view;
 
 import domain.Complaint;
+import domain.ComplaintType;
 import domain.User;
 import domain.UserType;
 import exception.EntityNotFoundException;
+import service.ComplaintService;
 import service.ProtectedConfigFile;
 import service.Service;
 import service.UserService;
@@ -46,34 +48,25 @@ public class ComplaintController extends BaseController {
 
             switch (action) {
                 case "/add":
-                    showRegistrationForm(request, response);
+                    showComplaintForm(request, response);
                     break;
                 case "/insert":
-                    insertUser(request, response);
+                    insertComplaint(request, response);
                     break;
                 case "/delete":
-                    deleteUser(request, response);
+                    deleteComplaint(request, response);
                     break;
                 case "/edit":
                     showEditForm(request, response);
                     break;
                 case "/update":
-                    updateUser(request, response);
+                    updateComplaint(request, response);
                     break;
-                case "/listUser":
-                    listUser(request, response);
-                    break;
-                case "/login":
-                    loginUser(request, response);
-                    break;
-                case "/logout":
-                    logoutUser(request, response);
-                    break;
-                case "/askForLogin":
-                    askForLogin(request, response);
+                case "/listComplaint":
+                    listComplaint(request, response);
                     break;
                 default:
-                    askForLogin(request, response);
+                    showComplaintForm(request, response);
                     break;
             }
         } catch (ServletException ex) {
@@ -91,21 +84,21 @@ public class ComplaintController extends BaseController {
             }
     }
 
-    private void listUser(HttpServletRequest request, HttpServletResponse response)
+    private void listComplaint(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             List<Complaint> listComplaint = service.findAll();
-            request.setAttribute("listUser", listComplaint);
+            request.setAttribute("listComplaint", listComplaint);
             RequestDispatcher dispatcher = request
-                    .getRequestDispatcher("/pages/user/ComplaintList.jsp");
+                    .getRequestDispatcher("/pages/complaintpages/ComplaintList.jsp");
             dispatcher.forward(request, response);
     }
 
-    private void showRegistrationForm(HttpServletRequest request, HttpServletResponse response)
+    private void showComplaintForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
             RequestDispatcher dispatcher = request
-                    .getRequestDispatcher("/views/pages/userpages/registrationForm.jsp");
-            request.setAttribute("types", UserType.values());
+                    .getRequestDispatcher("/views/pages/complaintpages/complaintForm.jsp");
+            request.setAttribute("types", ComplaintType.getComplaintTypeFullName());
             request.setAttribute("isNew", true);
             dispatcher.forward(request, response);
     }
@@ -114,22 +107,22 @@ public class ComplaintController extends BaseController {
 
             try {
                 String id = request.getParameter("id");
-                User existingUser = service.findById(id);
+                Complaint existingComplaint = service.findById(id);
                 RequestDispatcher dispatcher = request
-                        .getRequestDispatcher("/pages/user/UserForm.jsp");
+                        .getRequestDispatcher("/pages/complaintpages/complaintForm.jsp");
                 request.setAttribute("types", UserType.values());
-                request.setAttribute("user", existingUser);
+                request.setAttribute("user", existingComplaint);
                 request.setAttribute("isEdit", true);
                 dispatcher.forward(request, response);
             } catch (EntityNotFoundException e) {
                 request.setAttribute("message", e.getMessage());
-                listUser(request, response);
+                listComplaint(request, response);
             }
 
     }
 
-    private void insertUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-            User user = null;
+    private void insertComplaint(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        Complaint complaint = null;
 
 
             try {
@@ -149,7 +142,7 @@ public class ComplaintController extends BaseController {
                 System.out.println("UserController.insertUser userType: " + userType);
 
 
-                user = new User(id,
+                complaint = new Complaint(id,
                         userFirstName,
                         userSecondName,
                         userName,
@@ -160,11 +153,11 @@ public class ComplaintController extends BaseController {
                         userAddress,
                         UserType.valueOf(userType));
 
-                service.add(user);
+                service.add(complaint);
                 request.setAttribute("message", Message.buildSuccessMessage("User added successfully"));
-                listUser(request, response);
+                listComplaint(request, response);
             } catch (Exception e) {
-                request.setAttribute("user", user);
+                request.setAttribute("complaint", complaint);
                 request.setAttribute("message", processException(e));
                 request.setAttribute("isNew", true);
                 RequestDispatcher dispatcher = request
@@ -197,7 +190,7 @@ public class ComplaintController extends BaseController {
 
                 service.modify(user);
                 request.setAttribute("message", Message.buildSuccessMessage("User updated successfully"));
-                listUser(request, response);
+                listComplaint(request, response);
             } catch (Exception e) {
                 request.setAttribute("user", user);
                 request.setAttribute("message", processException(e));
@@ -215,7 +208,7 @@ public class ComplaintController extends BaseController {
             } catch (Exception e) {
                 request.setAttribute("message", processException(e));
             }
-            listUser(request, response);
+        listComplaint(request, response);
 
     }
 
