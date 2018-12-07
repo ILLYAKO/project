@@ -20,10 +20,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-
-/**
- * Servlet implementation class ComplaintController
- */
 public class ComplaintController extends BaseController {
     private Service<Complaint> service;
 
@@ -51,7 +47,7 @@ public class ComplaintController extends BaseController {
                     showComplaintForm(request, response);
                     break;
                 case "/insert":
-                    insertComplaint(request, response);
+                    //insertComplaint(request, response);
                     break;
                 case "/delete":
                     deleteComplaint(request, response);
@@ -66,7 +62,7 @@ public class ComplaintController extends BaseController {
                     listComplaint(request, response);
                     break;
                 default:
-                    showComplaintForm(request, response);
+                   // showComplaintForm(request, response);
                     break;
             }
         } catch (ServletException ex) {
@@ -86,10 +82,14 @@ public class ComplaintController extends BaseController {
 
     private void listComplaint(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("-listComplaint-");
+//            HttpSession session = request.getSession();
+//            User user = (User)session.getAttribute("user");
+
             List<Complaint> listComplaint = service.findAll();
             request.setAttribute("listComplaint", listComplaint);
             RequestDispatcher dispatcher = request
-                    .getRequestDispatcher("/pages/complaintpages/ComplaintList.jsp");
+                    .getRequestDispatcher("/views/pages/complaintpages/ComplaintList.jsp");
             dispatcher.forward(request, response);
     }
 
@@ -97,7 +97,7 @@ public class ComplaintController extends BaseController {
             throws ServletException, IOException {
 
             RequestDispatcher dispatcher = request
-                    .getRequestDispatcher("/views/pages/complaintpages/complaintForm.jsp");
+                    .getRequestDispatcher("complaintForm.jsp");
             request.setAttribute("types", ComplaintType.getComplaintTypeFullName());
             request.setAttribute("isNew", true);
             dispatcher.forward(request, response);
@@ -121,53 +121,48 @@ public class ComplaintController extends BaseController {
 
     }
 
-    private void insertComplaint(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+//    private void insertComplaint(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+//        Complaint complaint = null;
+//
+//
+//            try {
+//                String complaintId = UUID.randomUUID().toString();//A universally unique identifier (UUID) is a 128-bit number used to identify information in computer systems
+//                User informer = request.getParameter("userfirstname");
+//                String complaintType= request.getParameter("usersecondname");
+//                String complaintPart      = request.getParameter("username");
+//                //String userPassword  = request.getParameter("userpassword");
+//                ProtectedConfigFile protectedConfigFile =
+//                        new ProtectedConfigFile(request.getParameter("userpassword"));
+//                String userPassword = protectedConfigFile.getEncryptedPassword();
+//                String complaintDescription = request.getParameter("userage");
+//                String userGender    = request.getParameter("usergender");
+//                String userEmail = request.getParameter("useremail");
+//                String userAddress   = request.getParameter("useraddress");
+//                String userType = request.getParameter("usertype");
+//                System.out.println("UserController.insertUser userType: " + userType);
+//
+//
+//                complaint = new Complaint(complaintId,
+//                        informer,
+//                        complaintType,
+//                        complaintPart,
+//                        complaintDescription);
+//
+//                service.add(complaint);
+//                request.setAttribute("message", Message.buildSuccessMessage("User added successfully"));
+//                listComplaint(request, response);
+//            } catch (Exception e) {
+//                request.setAttribute("complaint", complaint);
+//                request.setAttribute("message", processException(e));
+//                request.setAttribute("isNew", true);
+//                RequestDispatcher dispatcher = request
+//                        .getRequestDispatcher("/index.jsp");
+//                dispatcher.forward(request, response);
+//            }
+//    }
+
+    private void updateComplaint(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Complaint complaint = null;
-
-
-            try {
-                String id = UUID.randomUUID().toString();//A universally unique identifier (UUID) is a 128-bit number used to identify information in computer systems
-                String userFirstName = request.getParameter("userfirstname");
-                String userSecondName= request.getParameter("usersecondname");
-                String userName      = request.getParameter("username");
-                //String userPassword  = request.getParameter("userpassword");
-                ProtectedConfigFile protectedConfigFile =
-                        new ProtectedConfigFile(request.getParameter("userpassword"));
-                String userPassword = protectedConfigFile.getEncryptedPassword();
-                String stringUserAge = request.getParameter("userage");
-                String userGender    = request.getParameter("usergender");
-                String userEmail = request.getParameter("useremail");
-                String userAddress   = request.getParameter("useraddress");
-                String userType = request.getParameter("usertype");
-                System.out.println("UserController.insertUser userType: " + userType);
-
-
-                complaint = new Complaint(id,
-                        userFirstName,
-                        userSecondName,
-                        userName,
-                        userPassword,
-                        Integer.parseInt(stringUserAge),
-                        userGender,
-                        userEmail,
-                        userAddress,
-                        UserType.valueOf(userType));
-
-                service.add(complaint);
-                request.setAttribute("message", Message.buildSuccessMessage("User added successfully"));
-                listComplaint(request, response);
-            } catch (Exception e) {
-                request.setAttribute("complaint", complaint);
-                request.setAttribute("message", processException(e));
-                request.setAttribute("isNew", true);
-                RequestDispatcher dispatcher = request
-                        .getRequestDispatcher("/index.jsp");
-                dispatcher.forward(request, response);
-            }
-    }
-
-    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            User user = null;
             try {
                 String id = request.getParameter("id");
                 String email = request.getParameter("email");
@@ -185,14 +180,14 @@ public class ComplaintController extends BaseController {
 
 //                user = new User(id,
 //                        email, password, UserType.valueOf(userType));
-                user = new User();
+                complaint = new Complaint();
 
 
-                service.modify(user);
+                service.modify(complaint);
                 request.setAttribute("message", Message.buildSuccessMessage("User updated successfully"));
                 listComplaint(request, response);
             } catch (Exception e) {
-                request.setAttribute("user", user);
+                request.setAttribute("user", complaint);
                 request.setAttribute("message", processException(e));
                 request.setAttribute("isEdit", true);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/user/UserForm.jsp");
@@ -200,7 +195,7 @@ public class ComplaintController extends BaseController {
             }
     }
 
-    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void deleteComplaint(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             try {
                 String id = request.getParameter("id");
                 service.remove(id);
@@ -253,8 +248,10 @@ public class ComplaintController extends BaseController {
 
                 try {
                     System.out.println("Something wrong -02 in loginUser");
-                    showRegistrationForm(request, response);
-                } catch (ServletException e1) {
+                    //showRegistrationForm(request, response);
+                }
+                //catch (ServletException e1)
+                 catch (Exception e1){
                     e1.printStackTrace();
                 }
 

@@ -20,6 +20,17 @@
     <url-pattern>/user/*</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>ComplaintController</servlet-name>
+    <display-name>ComplaintController</display-name>
+    <description></description>
+    <servlet-class>view.ComplaintController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ComplaintController</servlet-name>
+    <url-pattern>/complaint/*</url-pattern>
+  </servlet-mapping>
+
 
 
 

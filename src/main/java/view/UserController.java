@@ -233,7 +233,7 @@ public class UserController extends BaseController {
     private void loginUser(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         System.out.println("-loginUser-");
 
-       // HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
 
         String userEmail = request.getParameter("userEmail");
         String password = request.getParameter("password");
@@ -254,6 +254,7 @@ public class UserController extends BaseController {
             if (existingUser != null){
                 System.out.println("-existingUser-");
                 request.setAttribute("user", existingUser);
+                session.setAttribute("user", existingUser);
                 dispatcher = request.getRequestDispatcher("/views/pages/userpages/userRegistered.jsp");
                 dispatcher.forward(request, response);
             }else {
