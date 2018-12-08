@@ -5,3 +5,28 @@ body{
     background-size: 100%;
     background-position: center;
 }
+.header {
+    background: #62a08f;
+    color: white;
+    height: 190px;
+}
+.header strong {
+    color: white;
+    font-size: 70px;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+div#menu {
+    padding: 0 35px;
+}
+#menu a {
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+}
+div#main {
+    background: #182331;
+    color: white;
+    padding: 20px;
+    font-size: 30px;
+}

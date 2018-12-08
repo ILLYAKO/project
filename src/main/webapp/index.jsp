@@ -20,7 +20,7 @@
             a healthy life.
         </div>
 
-        <div id="footer">
+        <div id="footer" class="footer text-center">
             <jsp:include page="./views/layouts/footer.jsp"/>
         </div>
     </body>
