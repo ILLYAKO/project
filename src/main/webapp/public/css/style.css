@@ -28,5 +28,36 @@ div#main {
     background: #182331;
     color: white;
     padding: 20px;
-    font-size: 30px;
+    font-size: 20px;
+    margin-top: 30px;
+    }
+h1 {
+    color: white;
+}
+td {
+    color: white;
+    padding: 10px;
+}
+input[type="password"] {
+   color: black;
+    }
+
+input[type="text"] {
+   color: black;
+    }
+
+input[type="submit"] {
+   color: white;
+   background: #62a08f;
+   border: 1px solid #cffff2;
+    }
+
+.footer {
+    background: black;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    color: white;
+    padding: 30px;
 }

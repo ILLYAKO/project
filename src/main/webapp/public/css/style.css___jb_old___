@@ -5,3 +5,58 @@ body{
     background-size: 100%;
     background-position: center;
 }
+.header {
+    background: #62a08f;
+    color: white;
+    height: 190px;
+}
+.header strong {
+    color: white;
+    font-size: 70px;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+div#menu {
+    padding: 0 35px;
+}
+#menu a {
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+}
+div#main {
+    background: #182331;
+    color: white;
+    padding: 20px;
+    font-size: 20px;
+    }
+h1 {
+    color: white;
+}
+td {
+    color: white;
+    padding: 10px;
+}
+input[type="password"] {
+   color: black;
+    }
+
+input[type="text"] {
+   color: black;
+    }
+
+input[type="submit"] {
+   color: white;
+   background: #62a08f;
+   border: 1px solid #cffff2;
+    }
+
+.footer {
+    background: black;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    color: white;
+    padding: 30px;
+}

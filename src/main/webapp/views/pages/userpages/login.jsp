@@ -19,6 +19,7 @@
         <div id="header" class="header">
             <jsp:include page="/views/layouts/header.jsp"/>
         </div>
+        <div id="main" class="col-md-5 col-md-offset-5">
 
 
 
@@ -44,6 +45,7 @@
             Enter Password : <input type="password" name ="password"><br/>
             <input type ="submit" value="Login">
         </form>
+        </div>
         </div>
 
         <div id="footer" class="footer text-center">

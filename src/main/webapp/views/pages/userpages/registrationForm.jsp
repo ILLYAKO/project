@@ -10,33 +10,38 @@
        <link href="../public/css/style.css" rel="stylesheet">
 
     </head>
-        <%-- <style>
+        <style>
                    div.ex {
                     text-align: right width:300px;
                     padding: 10px;
-                    border: 5px solid grey;
+                    color: #c8f2ff;
                     margin: 0px
-              }
-        </style>--%>
+                    }
+                    div#main {
+                        color: red;
+                     }
+
+        </style>
     <body>
             <div id="header" class="header">
                 <jsp:include page="/views/layouts/header.jsp"/>
             </div>
+            <div id="main" class="col-md-5 col-md-offset-5">
         <h1>Registration Form</h1>
         <div class="ex">
-            <form action="insert" method="post">
+            <form action="insert" method="post" class="form-horizontal">
                 <table style="with: 50%">
                     <tr>
                         <td>First Name</td>
-                        <td><input type="text" name="userfirstname" /></td>
+                        <td><input type="text" name="userfirstname"  class="form-control" placeholder="Enter your first name" /></td>
                     </tr>
                     <tr>
                         <td>Second Name</td>
-                        <td><input type="text" name="usersecondname" /></td>
+                        <td><input type="text" name="usersecondname" class="form-control" placeholder="Enter your last name" /></td>
                     </tr>
                     <tr>
                         <td>Username</td>
-                        <td><input type="text" name="username" /></td>
+                        <td><input type="text" name="username" class="form-control" placeholder="Enter your user name"/></td>
                     </tr>
                     <tr>
                         <td>User Type</td>
@@ -61,11 +66,11 @@
                     </tr>
                     <tr>
                         <td>Password</td>
-                        <td><input type="password" name="userpassword" /></td>
+                        <td><input type="password" name="userpassword" class="form-control"  placeholder="Enter password"/></td>
                     </tr>
                     <tr>
                         <td>Age</td>
-                        <td><input type="text" name="userage" /></td>
+                        <td><input type="text" name="userage" class="form-control" placeholder="How old are you?"/></td>
                     </tr>
                     <tr>
                         <td>Gender</td>
@@ -77,17 +82,18 @@
                     </tr>
                     <tr>
                         <td>Email</td>
-                        <td><input type="text" name="useremail" /></td>
+                        <td><input type="text" name="useremail" class="form-control" placeholder="Enter your email"/></td>
                     </tr>
                     <tr>
                         <td>Address</td>
-                        <td><input type="text" name="useraddress" /></td>
+                        <td><input type="text" name="useraddress" class="form-control" placeholder="Enter your addresss" /></td>
                     </tr>
                 </table>
-                <input type="submit" value="register" />
-                <input type="reset" value="Clear" name="clear" />
+                <input type="submit" value="Register" class="btn btn-default btn-lg" />
+                <input type="reset" value="Clear" name="clear" class="btn btn-default btn-lg" />
             </form>
             <br>
+        </div>
         </div>
         <div id="footer" class="footer text-center">
             <jsp:include page="/views/layouts/footer.jsp"/>

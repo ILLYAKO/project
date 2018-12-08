@@ -13,11 +13,15 @@
         <%-- <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">     --%>
 
        <link href="/test14/public/css/style.css" rel="stylesheet">
+
+
     </head>
     <body>
         <div id="header">
             <jsp:include page="/views/layouts/header.jsp"/>
         </div>
+
+        <div id="main" class="col-md-5 col-md-offset-5">
 
         <div class="title-container">
             <h1>
@@ -37,6 +41,7 @@
         </div>
 
         <h2>User Details</h2>
+        </div>
 
 
 
