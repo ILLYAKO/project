@@ -17,7 +17,7 @@
 
     </head>
     <body>
-        <div id="header">
+        <div id="header" class="header">
             <jsp:include page="/views/layouts/header.jsp"/>
         </div>
 
@@ -45,7 +45,7 @@
 
 
 
-        <div id="footer">
+        <div id="footer" class="footer text-center">
             <jsp:include page="/views/layouts/footer.jsp"/>
         </div>
     </body>

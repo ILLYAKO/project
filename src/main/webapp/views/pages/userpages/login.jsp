@@ -40,10 +40,10 @@
 
         <h2>Login. User Details</h2>
         <div class="ex">
-        <form action="${pageContext.request.contextPath}/user/login" method="post">
-            Enter Email : <input type="text" name="userEmail"><br/>
-            Enter Password : <input type="password" name ="password"><br/>
-            <input type ="submit" value="Login">
+        <form action="${pageContext.request.contextPath}/user/login" method="post" class="form-horizontal">
+            Enter Email : <input type="text" name="userEmail"  class="form-control" placeholder="Enter your email"><br/>
+            Enter Password : <input type="password" name ="password"  class="form-control" placeholder="Enter your password"><br/>
+            <input type ="submit" value="Login" class="btn btn-default btn-lg">
         </form>
         </div>
         </div>

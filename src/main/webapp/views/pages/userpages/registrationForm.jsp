@@ -86,7 +86,7 @@
                     </tr>
                     <tr>
                         <td>Address</td>
-                        <td><input type="text" name="useraddress" class="form-control" placeholder="Enter your addresss" /></td>
+                        <td><input type="text" name="useraddress" class="form-control" placeholder="Enter your address" /></td>
                     </tr>
                 </table>
                 <input type="submit" value="Register" class="btn btn-default btn-lg" />

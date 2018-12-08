@@ -30,9 +30,13 @@ div#main {
     padding: 20px;
     font-size: 20px;
     margin-top: 30px;
+    margin-bottom: 80px;
     }
 h1 {
     color: white;
+}
+h2 {
+    margin-bottom: 25px;
 }
 td {
     color: white;
@@ -51,6 +55,11 @@ input[type="submit"] {
    background: #62a08f;
    border: 1px solid #cffff2;
     }
+
+.user-registered {
+    background: #1b886a;
+    margin: 35px;
+}
 
 .footer {
     background: black;

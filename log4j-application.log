@@ -373,3 +373,4 @@ com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long
 2018-12-02 23:09:40 ERROR BaseController:26 - No enum constant domain.UserType.c8454a18-ac51-4c0a-ab91-77272592e1a7
 2018-12-03 22:11:11 ERROR BaseController:26 - For input string: ""
 2018-12-03 22:25:40 ERROR BaseController:26 - For input string: ""
+2018-12-08 17:19:01 ERROR BaseController:32 - For input string: ""
