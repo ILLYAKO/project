@@ -1,10 +1,14 @@
-<% System.out.println("page Ask for Login."); %>
+<% System.out.println("page Ask for Registration."); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
     <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>User Data</title>
+        <title>Healthy Habits</title>
+      <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+       <%-- <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">     --%>
+
+       <link href="../public/css/style.css" rel="stylesheet">
+       <title>User Registration</title>
     </head>
     <style>
     div.ex {
