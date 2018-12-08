@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <strong>Healthy Habits</strong>
 
+
     <c:if test="${empty user}">
 
         <div id="menu">

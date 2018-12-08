@@ -293,7 +293,7 @@ public class UserController extends BaseController {
         if(session != null){
             session.invalidate();}
         request.setAttribute("user", user);
-        dispatcher = request.getRequestDispatcher("/index.jsp");//.forward(request,response);
+        dispatcher = request.getRequestDispatcher("goToLogin");
         dispatcher.forward(request, response);
     }
 

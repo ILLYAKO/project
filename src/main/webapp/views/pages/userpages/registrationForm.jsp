@@ -3,23 +3,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
     <head>
-        <title>Healthy Habits</title>
+        <title>User Registration</title>
       <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
        <%-- <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">     --%>
 
        <link href="../public/css/style.css" rel="stylesheet">
-       <title>User Registration</title>
+
     </head>
-    <style>
-    div.ex {
-        text-align: right width:300px;
-        padding: 10px;
-        border: 5px solid grey;
-        margin: 0px
-    }
-    </style>
+        <%-- <style>
+                   div.ex {
+                    text-align: right width:300px;
+                    padding: 10px;
+                    border: 5px solid grey;
+                    margin: 0px
+              }
+        </style>--%>
     <body>
-            <div id="header">
+            <div id="header" class="header">
                 <jsp:include page="/views/layouts/header.jsp"/>
             </div>
         <h1>Registration Form</h1>
@@ -89,7 +89,7 @@
             </form>
             <br>
         </div>
-        <div id="footer">
+        <div id="footer" class="footer text-center">
             <jsp:include page="/views/layouts/footer.jsp"/>
         </div>
     </body>
