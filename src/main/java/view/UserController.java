@@ -66,15 +66,16 @@ public class UserController extends BaseController {
                 case "/listUser":
                     listUser(request, response);
                     break;
+                case "/askForLogin":
+                    askForLogin(request, response);
+                    break;
                 case "/login":
                     loginUser(request, response);
                     break;
                 case "/logout":
                     logoutUser(request, response);
                     break;
-                case "/askForLogin":
-                    askForLogin(request, response);
-                    break;
+
                 default:
                     askForLogin(request, response);
                     break;
@@ -254,7 +255,7 @@ public class UserController extends BaseController {
             if (existingUser != null){
                 System.out.println("-existingUser-");
                 request.setAttribute("user", existingUser);
-                session.setAttribute("user", existingUser);
+                session.setAttribute("user", existingUser);//<<<<<<<<<<<<<<<<Session
                 dispatcher = request.getRequestDispatcher("/views/pages/userpages/userRegistered.jsp");
                 dispatcher.forward(request, response);
             }else {

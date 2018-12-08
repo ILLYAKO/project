@@ -47,7 +47,7 @@ public class ComplaintController extends BaseController {
                     showComplaintForm(request, response);
                     break;
                 case "/insert":
-                    //insertComplaint(request, response);
+                    insertComplaint(request, response);
                     break;
                 case "/delete":
                     deleteComplaint(request, response);
@@ -82,7 +82,7 @@ public class ComplaintController extends BaseController {
 
     private void listComplaint(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("-listComplaint-");
+        System.out.println("-ComplaintController.listComplaint-");
 //            HttpSession session = request.getSession();
 //            User user = (User)session.getAttribute("user");
 
@@ -97,7 +97,7 @@ public class ComplaintController extends BaseController {
             throws ServletException, IOException {
 
             RequestDispatcher dispatcher = request
-                    .getRequestDispatcher("complaintForm.jsp");
+                    .getRequestDispatcher("/views/pages/complaintpages/complaintForm.jsp");
             request.setAttribute("types", ComplaintType.getComplaintTypeFullName());
             request.setAttribute("isNew", true);
             dispatcher.forward(request, response);
@@ -121,13 +121,17 @@ public class ComplaintController extends BaseController {
 
     }
 
-//    private void insertComplaint(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-//        Complaint complaint = null;
+    private void insertComplaint(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        Complaint complaint = null;
+        System.out.println("--insertComplaint--");
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        System.out.println("--ComplaintController.insertComplaint user: " + user.getUserFirstName());
 //
 //
 //            try {
 //                String complaintId = UUID.randomUUID().toString();//A universally unique identifier (UUID) is a 128-bit number used to identify information in computer systems
-//                User informer = request.getParameter("userfirstname");
+               //User informer = request.getParameter("user");
 //                String complaintType= request.getParameter("usersecondname");
 //                String complaintPart      = request.getParameter("username");
 //                //String userPassword  = request.getParameter("userpassword");
@@ -159,7 +163,7 @@ public class ComplaintController extends BaseController {
 //                        .getRequestDispatcher("/index.jsp");
 //                dispatcher.forward(request, response);
 //            }
-//    }
+    }
 
     private void updateComplaint(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Complaint complaint = null;

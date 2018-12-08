@@ -57,7 +57,7 @@
                             </tr>
                         </c:forEach>
                     </table>
-                    <a href="${pageContext.request.contextPath}/car/new" role="button" class="btn btn-info btn-lg">Add Car</a>
+                    <a href="${pageContext.request.contextPath}/complaint/add" role="button" class="btn btn-info btn-lg">Add Complaint</a>
                 </div>
             </section>
         </div>

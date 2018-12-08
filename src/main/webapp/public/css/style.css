@@ -1,0 +1,7 @@
+body{
+    margin: 0;
+    padding:0;
+    background-image: url("/test14/public/images/backgr.jpg");
+    background-size: 100%;
+    background-position: center;
+}

@@ -35,7 +35,7 @@
         </div>
 
         <h2>Login. User Details</h2>
-        <form action="../user/login" method="post">
+        <form action="${pageContext.request.contextPath}/user/login" method="post">
             Enter Email : <input type="text" name="userEmail"><br/>
             Enter Password : <input type="password" name ="password"><br/>
             <input type ="submit" value="Login">
