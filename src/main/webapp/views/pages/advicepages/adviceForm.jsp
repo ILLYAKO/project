@@ -24,7 +24,6 @@ AdviceForm
 
                     <table style="with: 50%">
                        <tr>
-
                             <td>What is a name of advice?</td>
                             <td><input type="text" name="adviceName" /></td>
                         </tr>
