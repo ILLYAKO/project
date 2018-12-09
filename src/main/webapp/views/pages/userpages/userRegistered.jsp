@@ -26,7 +26,7 @@
         <div class="title-container">
             <h1>
                 <c:if test="${user!='null'}">
-                    Registered User<br>
+                    Hello ${user.getUserFirstName()}<br>
                 </c:if>
                 <c:if test="${isWrong}">
                     Wrong combination email & password. OR<br>
@@ -40,7 +40,10 @@
             </h1>
         </div>
 
-        <h2>User Details</h2>
+        <h2>User Details:</h2>
+        The first name: ${user.getUserFirstName()}<br>
+        The family name: ${user.getUserSecondName()}<br>
+        User email: ${user.getUserEmail()}<br>
         </div>
 
 

@@ -8,7 +8,7 @@
         <li><a href="${pageContext.request.contextPath}/user/askForLogin">LOGIN</a></li>
         <li><a href="${pageContext.request.contextPath}/user/logout">LOGOUT</a></li>
         <li><a href="${pageContext.request.contextPath}/complaint/listComplaint">COMPLAINTS</a></li>
-        <li><a href="${pageContext.request.contextPath}/advice/addAdvice">ADVICE</a></li>
+        <li><a href="${pageContext.request.contextPath}/advice/listAdvice">ADVICE</a></li>
         <li><a href="${pageContext.request.contextPath}/schedule/userSchedule">SCHEDULE</a></li>
         <li><a href="${pageContext.request.contextPath}/progress/userProgress">PROGRESS</a></li>
         <li><a href="https://www.sunlife.ca/ca/Insurance/Health+insurance?vgnLocale=en_CA">SHOP</a></li>

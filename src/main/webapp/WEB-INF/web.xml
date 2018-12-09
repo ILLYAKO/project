@@ -31,8 +31,15 @@
     <url-pattern>/complaint/*</url-pattern>
   </servlet-mapping>
 
-
-
-
+  <servlet>
+    <servlet-name>AdviceController</servlet-name>
+    <display-name>AdviceController</display-name>
+    <description></description>
+    <servlet-class>view.AdviceController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdviceController</servlet-name>
+    <url-pattern>/advice/*</url-pattern>
+  </servlet-mapping>
 
 </web-app>
