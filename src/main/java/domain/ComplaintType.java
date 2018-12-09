@@ -9,7 +9,12 @@ public class ComplaintType {
 
     public ComplaintType() {    }
 
-    public ComplaintType(String complaintTypeID, String complaintTypeShortName,String complaintTypeFullName, String complaintTypeDescription) {
+    public ComplaintType(String complaintTypeID, String complaintTypeShortName) {
+        this.complaintTypeID = complaintTypeID;
+        this.complaintTypeShortName = complaintTypeShortName;
+    }
+
+    public ComplaintType(String complaintTypeID, String complaintTypeShortName, String complaintTypeFullName, String complaintTypeDescription) {
         this.complaintTypeID = complaintTypeID;
         this.complaintTypeShortName = complaintTypeShortName;
         this.complaintTypeFullName = complaintTypeFullName;

@@ -41,7 +41,7 @@ public class ComplaintService implements Service<Complaint> {
 //    }
 
     public void add(Complaint complaint) {
-        validate(complaint);
+        //validate(complaint);
         complaintRepository.add(complaint);
     }
 

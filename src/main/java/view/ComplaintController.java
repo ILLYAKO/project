@@ -89,7 +89,7 @@ public class ComplaintController extends BaseController {
             List<Complaint> listComplaint = service.findAll();
             request.setAttribute("listComplaint", listComplaint);
             RequestDispatcher dispatcher = request
-                    .getRequestDispatcher("/views/pages/complaintpages/ComplaintList.jsp");
+                    .getRequestDispatcher("/views/pages/complaintpages/complaintList.jsp");
             dispatcher.forward(request, response);
     }
 
@@ -106,13 +106,13 @@ public class ComplaintController extends BaseController {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
             try {
-                String id = request.getParameter("id");
+                String id = request.getParameter("complaintId");
                 Complaint existingComplaint = service.findById(id);
                 RequestDispatcher dispatcher = request
                         .getRequestDispatcher("/pages/complaintpages/complaintForm.jsp");
-                request.setAttribute("types", UserType.values());
-                request.setAttribute("user", existingComplaint);
-                request.setAttribute("isEdit", true);
+                //request.setAttribute("types", UserType.values());
+                //request.setAttribute("user", existingComplaint);
+                //request.setAttribute("isEdit", true);
                 dispatcher.forward(request, response);
             } catch (EntityNotFoundException e) {
                 request.setAttribute("message", e.getMessage());
@@ -127,42 +127,26 @@ public class ComplaintController extends BaseController {
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user");
         System.out.println("--ComplaintController.insertComplaint user: " + user.getUserFirstName());
-//
-//
-//            try {
-//                String complaintId = UUID.randomUUID().toString();//A universally unique identifier (UUID) is a 128-bit number used to identify information in computer systems
-               //User informer = request.getParameter("user");
-//                String complaintType= request.getParameter("usersecondname");
-//                String complaintPart      = request.getParameter("username");
-//                //String userPassword  = request.getParameter("userpassword");
-//                ProtectedConfigFile protectedConfigFile =
-//                        new ProtectedConfigFile(request.getParameter("userpassword"));
-//                String userPassword = protectedConfigFile.getEncryptedPassword();
-//                String complaintDescription = request.getParameter("userage");
-//                String userGender    = request.getParameter("usergender");
-//                String userEmail = request.getParameter("useremail");
-//                String userAddress   = request.getParameter("useraddress");
-//                String userType = request.getParameter("usertype");
-//                System.out.println("UserController.insertUser userType: " + userType);
-//
-//
-//                complaint = new Complaint(complaintId,
-//                        informer,
-//                        complaintType,
-//                        complaintPart,
-//                        complaintDescription);
-//
-//                service.add(complaint);
-//                request.setAttribute("message", Message.buildSuccessMessage("User added successfully"));
-//                listComplaint(request, response);
-//            } catch (Exception e) {
-//                request.setAttribute("complaint", complaint);
-//                request.setAttribute("message", processException(e));
-//                request.setAttribute("isNew", true);
-//                RequestDispatcher dispatcher = request
-//                        .getRequestDispatcher("/index.jsp");
-//                dispatcher.forward(request, response);
-//            }
+        //A universally unique identifier (UUID) is a 128-bit number used to identify information in computer systems
+        String complaintId = UUID.randomUUID().toString();
+        String complaintTypeShortName =   request.getParameter("complaintTypeShortName");
+        String complaintPartName =        request.getParameter("complaintPartName");
+        String complaintPartDescription = request.getParameter("complaintPartDescription");
+
+        if(complaintTypeShortName.isEmpty() || complaintPartName.isEmpty() || complaintPartDescription.isEmpty()){
+            request.setAttribute("user", user);
+            RequestDispatcher rd = request.getRequestDispatcher("/views/pages/complaintpages/complaintList.jsp");//complaintForm.jsp
+
+            //out.println("<font color=red>Please fill all the fields</font>");
+            rd.forward(request, response);
+        }else{
+            Complaint newComplaint = new Complaint(complaintId,user,complaintTypeShortName,complaintPartName,complaintPartDescription);
+            ComplaintService complaintService = new ComplaintService();
+            complaintService.add(newComplaint);
+            listComplaint(request, response);
+        }
+
+
     }
 
     private void updateComplaint(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -201,7 +185,7 @@ public class ComplaintController extends BaseController {
 
     private void deleteComplaint(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             try {
-                String id = request.getParameter("id");
+                String id = request.getParameter("complaintId");
                 service.remove(id);
                 request.setAttribute("message", Message.buildSuccessMessage("User deleted successfully"));
             } catch (Exception e) {

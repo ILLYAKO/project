@@ -26,7 +26,7 @@ ComplaintForm
                         <tr>
                             <td>What is a type of your health problem?</td>
                             <td>
-                                <select id="problemType" name="problemType" onchange="return setValue();">
+                                <select id="problemType" name="complaintTypeShortName" onchange="return setValue();">
                                     <option value="dropdown">Please select
                                     <option value="parasites">Certain infectious and parasitic Problems</option>
                                     <option value="neoplasms">Neoplasms</option>
@@ -57,11 +57,11 @@ ComplaintForm
                         <tr>
 
                             <td>What part of the problem</td>
-                            <td><input type="text" name="problemPart" /></td>
+                            <td><input type="text" name="complaintPartName" /></td>
                         </tr>
                         <tr>
                             <td>Description</td>
-                            <td><textarea type="text" name="problemDescription" cols="60" rows="6"/></textarea>
+                            <td><textarea type="text" name="complaintPartDescription" cols="60" rows="6"/></textarea>
                             </td>
                         </tr>
                     </table>

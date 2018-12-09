@@ -21,10 +21,10 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
 
         try{
             log("Creating prepared statement...");
-            String SQL = "INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?)";
+            String SQL = "INSERT INTO complaints VALUES (?,?)";
             PreparedStatement pstmt = conn.prepareStatement(SQL); // generates sql query
-//            pstmt.setString(1, newComplaint.getUserID());
-//            pstmt.setString(2,newComplaint.getUserFirstName());
+            pstmt.setString(1, newComplaint.getComplaintId());
+            pstmt.setString(2,newComplaint.getComplaintPart());
 //            pstmt.setString(3,newComplaint.getUserSecondName());
 //            pstmt.setString(4,newComplaint.getUserName());
 //            pstmt.setString(5,newComplaint.getUserPassword());
@@ -209,7 +209,7 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
         try
         {
             log("Creating statement...");
-            String SQL = "SELECT * FROM users";
+            String SQL = "SELECT * FROM complaints";
 
             Statement stmt = conn.createStatement();
 
@@ -217,19 +217,16 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
 
             while(rs.next())
             {
-                // from DB
-//                users.add(new User( rs.getString("user_id"),
-//                                rs.getString("user_firstname"),
-//                                rs.getString("user_secondname"),
-//                                rs.getString("user_username"),
-//                                rs.getString("user_password"),
-//                                Integer.parseInt(rs.getString("user_age")),
-//                                rs.getString("user_gender"),
-//                                rs.getString("user_email"),
-//                                rs.getString("user_address"),
-//                                UserType.valueOf(rs.getString("user_type"))
-//                        )
-//                );
+                 //from DB
+                complaints.add(
+                        new Complaint(
+                                rs.getString("complaint_id"),
+                                new User(),
+                        "123",
+                        "456",
+                        "789"
+                                )
+                        );
             }
         }
         catch(SQLException se){
