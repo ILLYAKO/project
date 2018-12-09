@@ -37,6 +37,7 @@ h1 {
 }
 h2 {
     margin-bottom: 25px;
+    color: white;
 }
 td {
     color: white;
@@ -60,7 +61,16 @@ input[type="submit"] {
     background: #1b886a;
     margin: 35px;
 }
+table > * {
+    color: white;
+}
 
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
+    background-color: #00271c;
+}
+a:hover{
+color:red;
+}
 .footer {
     background: black;
     position: fixed;
