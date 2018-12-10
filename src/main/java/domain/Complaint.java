@@ -33,6 +33,7 @@ public class Complaint {
         this.complaintDescription = complaintDescription;
     }
 
+
     public Complaint(String complaintId, User informer, ComplaintType complaintType,
                      ComplaintPart complaintPart, String complaintDescription) {
         this.complaintId = complaintId;
