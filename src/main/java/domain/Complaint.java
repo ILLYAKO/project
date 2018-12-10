@@ -24,7 +24,6 @@ public class Complaint {
         this.complaintDescription = complaintDescription;
     }
 
-
     public Complaint(String complaintId, User informer,String complaintTypeShortName, String complaintPartName,
                      String complaintDescription) {
         this.complaintId = complaintId;
