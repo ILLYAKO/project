@@ -65,6 +65,7 @@ public class ComplaintController extends BaseController {
                    // showComplaintForm(request, response);
                     break;
             }
+
         } catch (ServletException ex) {
             throw ex;
         } catch (Exception ex) {
