@@ -36,7 +36,7 @@
                     </c:if>
                     <div class="ex">
                     <table class="table table-hover">
-                        <caption><h2>List of Cars</h2></caption>
+                        <caption><h2>List of Complaints</h2></caption>
                         <tr>
                             <th>Complaint type</th>
                             <th>Complaint part</th>
@@ -65,6 +65,9 @@
 
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        </div>
+        <div id="footer" class="footer text-center">
+            <jsp:include page="/views/layouts/footer.jsp"/>
         </div>
     </body>
 </html>

@@ -4,8 +4,10 @@ public class Complaint {
 
     private String complaintId;
     private User informer = new User();
-    private String complaintType;
-    private String complaintPart;
+    private ComplaintType complaintType;
+    private String complaintTypeShortName;
+    private ComplaintPart complaintPart;
+    private String complaintPartName;
     private String complaintDescription;
 
     public Complaint() {    }
@@ -14,7 +16,25 @@ public class Complaint {
         this.informer = informer;
     }
 
-    public Complaint(String complaintId, User informer,String complaintType, String complaintPart, String complaintDescription) {
+    public Complaint(User informer,String complaintTypeShortName, String complaintPartName,
+                     String complaintDescription) {
+        this.informer = informer;
+        this.complaintTypeShortName = complaintTypeShortName;
+        this.complaintPartName = complaintPartName;
+        this.complaintDescription = complaintDescription;
+    }
+
+    public Complaint(String complaintId, User informer,String complaintTypeShortName, String complaintPartName,
+                     String complaintDescription) {
+        this.complaintId = complaintId;
+        this.informer = informer;
+        this.complaintTypeShortName = complaintTypeShortName;
+        this.complaintPartName = complaintPartName;
+        this.complaintDescription = complaintDescription;
+    }
+
+    public Complaint(String complaintId, User informer, ComplaintType complaintType,
+                     ComplaintPart complaintPart, String complaintDescription) {
         this.complaintId = complaintId;
         this.informer = informer;
         this.complaintType = complaintType;
@@ -38,20 +58,36 @@ public class Complaint {
         this.informer = informer;
     }
 
-    public String getComplaintType() {
+    public ComplaintType getComplaintType() {
         return complaintType;
     }
 
-    public void setComplaintType(String complaintType) {
+    public void setComplaintType(ComplaintType complaintType) {
         this.complaintType = complaintType;
     }
 
-    public String getComplaintPart() {
+    public String getComplaintTypeShortName() {
+        return complaintTypeShortName;
+    }
+
+    public void setComplaintTypeShortName(String complaintTypeShortName) {
+        this.complaintTypeShortName = complaintTypeShortName;
+    }
+
+    public ComplaintPart getComplaintPart() {
         return complaintPart;
     }
 
-    public void setComplaintPart(String complaintPart) {
+    public void setComplaintPart(ComplaintPart complaintPart) {
         this.complaintPart = complaintPart;
+    }
+
+    public String getComplaintPartName() {
+        return complaintPartName;
+    }
+
+    public void setComplaintPartName(String complaintPartName) {
+        this.complaintPartName = complaintPartName;
     }
 
     public String getComplaintDescription() {

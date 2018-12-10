@@ -16,22 +16,15 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
      * @param newComplaint
      */
     public void add(Complaint newComplaint) {
-
         Connection conn = openConnection();
-
         try{
             log("Creating prepared statement...");
-            String SQL = "INSERT INTO complaints VALUES (?,?)";
-            PreparedStatement pstmt = conn.prepareStatement(SQL); // generates sql query
+//-----------------
+            String complaintsSQL = "INSERT INTO complaints VALUES (?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(complaintsSQL); // generates sql query
             pstmt.setString(1, newComplaint.getComplaintId());
-            pstmt.setString(2,newComplaint.getComplaintPart());
-//            pstmt.setString(3,newComplaint.getUserSecondName());
-//            pstmt.setString(4,newComplaint.getUserName());
-//            pstmt.setString(5,newComplaint.getUserPassword());
-//            pstmt.setString(6,Integer.toString(user.getUserAge()));
-//            pstmt.setString(7,newComplaint.getUserGender());
-//            pstmt.setString(8,newComplaint.getUserEmail());
-//            pstmt.setString(9,newComplaint.getUserAddress());
+            pstmt.setString(2, newComplaint.getComplaintPart().getComplaintPart_id());
+            pstmt.setString(3, newComplaint.getComplaintDescription());
 
             if(pstmt.executeUpdate() == 0){
                 throw new InfrastructureException("The insert wasn't executed!");

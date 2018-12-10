@@ -123,12 +123,11 @@ public class ComplaintController extends BaseController {
 
     private void insertComplaint(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Complaint complaint = null;
-        System.out.println("--insertComplaint--");
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user");
         System.out.println("--ComplaintController.insertComplaint user: " + user.getUserFirstName());
-        //A universally unique identifier (UUID) is a 128-bit number used to identify information in computer systems
-        String complaintId = UUID.randomUUID().toString();
+
+
         String complaintTypeShortName =   request.getParameter("complaintTypeShortName");
         String complaintPartName =        request.getParameter("complaintPartName");
         String complaintPartDescription = request.getParameter("complaintPartDescription");
@@ -137,12 +136,11 @@ public class ComplaintController extends BaseController {
             request.setAttribute("user", user);
             RequestDispatcher rd = request.getRequestDispatcher("/views/pages/complaintpages/complaintList.jsp");//complaintForm.jsp
 
-            //out.println("<font color=red>Please fill all the fields</font>");
             rd.forward(request, response);
         }else{
-            Complaint newComplaint = new Complaint(complaintId,user,complaintTypeShortName,complaintPartName,complaintPartDescription);
+            Complaint newComplaint = new Complaint(user,complaintTypeShortName,complaintPartName,complaintPartDescription);
             ComplaintService complaintService = new ComplaintService();
-            complaintService.add(newComplaint);
+            complaintService.add(newComplaint); //<<<<<<<<<<<----------------------add
             listComplaint(request, response);
         }
 

@@ -2,12 +2,18 @@ package service;
 
 import com.google.common.annotations.VisibleForTesting;
 import domain.Complaint;
+import domain.ComplaintPart;
+import domain.ComplaintType;
 import exception.EntityNotFoundException;
 import exception.ValidationException;
+import repository.ComplaintPartRepository;
 import repository.ComplaintRepository;
+import repository.ComplaintTypeRepository;
 import repository.Repository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public class ComplaintService implements Service<Complaint> {
 
@@ -22,7 +28,19 @@ public class ComplaintService implements Service<Complaint> {
     }
 
     @VisibleForTesting
-    void validate(Complaint complaint) {
+    void validateType(Complaint complaint) {
+        ComplaintTypeService complaintTypeService = new ComplaintTypeService();
+        //complaintTypeService.validateType(complaint.getComplaintType());
+
+
+
+
+
+        ;
+        System.out.println(complaint.getComplaintId());
+       // System.out.println(complaint.getComplaintPart());
+        System.out.println(complaint.getComplaintType());
+       // System.out.println(complaint.getComplaintDescription());
 //        if (complaint.getYear() < MAX_YEAR_ALLOWED) {
 //            throw new ValidationException("The complaint cannot be older than year 2000");
 //        }
@@ -41,8 +59,42 @@ public class ComplaintService implements Service<Complaint> {
 //    }
 
     public void add(Complaint complaint) {
-        //validate(complaint);
-        complaintRepository.add(complaint);
+
+        System.out.println("--ComplaintService.add  complaint.getComplaintType(): "+complaint.getComplaintType());
+        System.out.println("--ComplaintService.add  complaint.getComplaintDescription(): "+complaint.getComplaintDescription());
+        System.out.println("--ComplaintService.add  complaint.getComplaintPart(): "+complaint.getComplaintPart());
+        System.out.println("--ComplaintService.add  complaint.getComplaintPart(): "+complaint.getInformer().getUserFirstName());
+
+        //validateType(complaint);
+////////////////
+        ComplaintType complaintType =new ComplaintType();
+        complaintType.setComplaintTypeShortName(complaint.getComplaintTypeShortName());
+        ComplaintTypeService complaintTypeService = new ComplaintTypeService();
+        ComplaintType complaintTypeNew = complaintTypeService.findByCriteria("problemtype_shortname",
+                complaintType.getComplaintTypeShortName());
+/////////////////
+        ComplaintPart complaintPart = new ComplaintPart();
+        complaintPart.setComplaintPartName(complaint.getComplaintPartName());
+        ComplaintPartService complaintPartService = new ComplaintPartService();
+        ComplaintPart complaintPartNew = complaintPartService.findByCriteria("problematicpart_name",
+                complaintPart.getComplaintPartName());
+        if(complaintPartNew == null) {
+            complaintPart.setComplaintPart_id(UUID.randomUUID().toString());
+            complaintPart.setComplaintType_id(complaintTypeNew.getComplaintTypeID());
+            complaintPartService.add(complaintPart);
+            complaintPartNew = complaintPartService.findByCriteria("problematicpart_name",complaintPart.getComplaintPartName());
+        }
+////////////////
+        //A universally unique identifier (UUID) is a 128-bit number used to identify information in computer systems
+        String complaintId = UUID.randomUUID().toString();
+        Complaint complaintNew = new Complaint(
+                complaintId,
+                complaint.getInformer(),
+                complaintTypeNew,
+                complaintPartNew,
+                complaint.getComplaintDescription()
+        );
+        complaintRepository.add(complaintNew);
     }
 
     public void modify(Complaint complaint) {
@@ -51,7 +103,7 @@ public class ComplaintService implements Service<Complaint> {
                 .orElseThrow(
                         () -> new EntityNotFoundException("Complaint with id " + complaint.getComplaintId() + " was not found!"));
 
-        validate(complaint);
+        //validate(complaint);
         complaintRepository.modify(complaint);
     }
 

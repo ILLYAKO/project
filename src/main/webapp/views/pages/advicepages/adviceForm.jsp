@@ -1,24 +1,25 @@
-AdviceForm
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<% System.out.println("page of Complaint List"); %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<%--
 <!doctype html>
+--%>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
-        <title>Advices</title>
+       <title>Advice Form</title>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+       <%-- <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">     --%>
 
-        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
+       <link href="/test14/public/css/style.css" rel="stylesheet">
+
     </head>
     <body>
-        <div id="header">
+        <div id="header" class="header">
             <jsp:include page="/views/layouts/header.jsp"/>
         </div>
+         <div id="main" class="col-md-8 col-md-offset-2">
                 <div class="ex">
                 <form name="adviceForm" action="${pageContext.request.contextPath}/advice/insert" method="post">
 
@@ -30,7 +31,7 @@ AdviceForm
                         <tr>
                             <td>What is a scope of your advice?</td>
                             <td>
-                                <select id="adviceType" name="adviceType" onchange="return setValue();">
+                                <select class="form-control" id="adviceType" name="adviceType" onchange="return setValue();">
                                     <option value="dropdown">Please select type
                                     <option value="parasites">Certain infectious and parasitic Problems</option>
                                     <option value="neoplasms">Neoplasms</option>
@@ -65,24 +66,19 @@ AdviceForm
                         </tr>
                         <tr>
                             <td>Description</td>
-                            <td><textarea type="text" name="adviceDescription" cols="60" rows="6"/></textarea>
+                            <td><textarea class="form-control" type="text" name="adviceDescription" cols="60" rows="6"/></textarea>
                             </td>
                         </tr>
                     </table>
                     <input type="submit" value="Advice" />
                 </form>
                 </div>
-
-
-
-
-
-
-
-
+        <%--
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <div id="footer">
+        --%>
+        </div>
+        <div id="footer" class="footer text-center">
             <jsp:include page="/views/layouts/footer.jsp"/>
         </div>
     </body>

@@ -36,7 +36,7 @@
                     </c:if>
                     <div class="ex">
                     <table class="table table-hover">
-                        <caption><h2>List of Cars</h2></caption>
+                        <caption><h2>List of Advices</h2></caption>
                         <tr>
                             <th>Advice type</th>
                             <th>Advice part</th>
