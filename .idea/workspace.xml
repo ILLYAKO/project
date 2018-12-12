@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3ea7899e-7de7-4265-9aa1-56a23773d0de" name="Default Changelist" comment="1. new db">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log4j-application.log" beforeDir="false" afterPath="$PROJECT_DIR$/log4j-application.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/ComplaintRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/ComplaintRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/ComplaintService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/ComplaintService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ComplaintController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ComplaintController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/views/pages/advicepages/adviceList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/views/pages/advicepages/adviceList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/repository/ComplaintRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/repository/ComplaintRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/service/ComplaintService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/service/ComplaintService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/UserController.class" afterDir="false" />
+    <list default="true" id="3ea7899e-7de7-4265-9aa1-56a23773d0de" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ComplaintController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/ComplaintController.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,8 +20,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/repository/ComplaintRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="569">
-              <caret line="40" column="41" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
+            <state relative-caret-position="294">
+              <caret line="29" column="18" lean-forward="true" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -308,7 +299,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544590587537" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544590813973" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -539,7 +530,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544500157664</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="2. new db">
+      <created>1544590705693</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1544590705693</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -553,9 +551,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49845678" visible="true" weight="0.19083156" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49845678" visible="true" weight="0.19083156" />
       <window_info id="Structure" order="1" sideWeight="0.5015432" side_tool="true" weight="0.18869936" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -565,7 +562,7 @@
       <window_info id="Favorites" order="7" sideWeight="0.5015432" side_tool="true" weight="0.18869936" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2979415" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2979415" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -665,7 +662,8 @@
     <MESSAGE value="1. advice&#10;2. guide" />
     <MESSAGE value="1. new server&#10;2. new repository" />
     <MESSAGE value="1. new db" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. new db" />
+    <MESSAGE value="2. new db" />
+    <option name="LAST_COMMIT_MESSAGE" value="2. new db" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1064,8 +1062,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/repository/ComplaintRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="40" column="41" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
+        <state relative-caret-position="294">
+          <caret line="29" column="18" lean-forward="true" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
