@@ -134,6 +134,7 @@ public class UserController extends BaseController {
 
     private void insertUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
             User user = null;
+        HttpSession session = request.getSession();
 
 
             try {
@@ -172,7 +173,7 @@ public class UserController extends BaseController {
                 request.setAttribute("message", processException(e));
                 request.setAttribute("isNew", true);
                 RequestDispatcher dispatcher = request
-                        .getRequestDispatcher("/index.jsp");
+                        .getRequestDispatcher("/views/pages/userpages/registrationForm.jsp");
                 dispatcher.forward(request, response);
             }
     }
@@ -262,6 +263,8 @@ public class UserController extends BaseController {
                 //request.setAttribute("message", "CREATE USER");
                 System.out.println("Something wrong -01 in loginUser");
                 request.setAttribute("isWrong", true);
+                dispatcher = request.getRequestDispatcher("/views/pages/userpages/login.jsp");
+                dispatcher.forward(request, response);
 
                 try {
                     System.out.println("Something wrong -02 in loginUser");

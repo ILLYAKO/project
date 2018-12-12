@@ -22,7 +22,7 @@
 
         <div id="main" class="col-md-8 col-md-offset-2">
 
-                    <h2>COMPLAINTS:</h2>
+                    <h2>ADVICES:</h2>
 
                     <c:if test="${message != null}">
                         <div class="alert <c:out value='${message.type.reference}' />">
@@ -38,17 +38,17 @@
                     <table class="table table-hover">
                         <caption><h2>List of Advices</h2></caption>
                         <tr>
-                            <th>Advice type</th>
+                            <th>Advice </th>
                             <th>Advice part</th>
                             <th>Advice description</th>
-                            <th>Advice</th>
+                            <th>Advice type</th>
                             <th>Actions</th>
                         </tr>
                         <c:forEach var="advice" items="${listAdvice}">
                             <tr>
+                                <td><c:out value="${advice.adviceDescription}" /></td>
                                 <td><c:out value="${advice.adviceType}" /></td>
                                 <td><c:out value="${advice.advicePart}" /></td>
-                                <td><c:out value="${advice.adviceDescription}" /></td>
                                  <td><c:out value="${advice.adviceDescription}" /></td>
                                 <td>
                                     <a href="${pageContext.request.contextPath}/advice/edit?id=<c:out value='${advice.adviceId}' />">Edit</a>

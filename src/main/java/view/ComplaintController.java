@@ -83,9 +83,10 @@ public class ComplaintController extends BaseController {
 
     private void listComplaint(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("-ComplaintController.listComplaint-");
-//            HttpSession session = request.getSession();
-//            User user = (User)session.getAttribute("user");
+            System.out.println("-ComplaintController.listComplaint-");
+            HttpSession session = request.getSession();
+            User user = (User)session.getAttribute("user");
+            System.out.println("--ComplaintController.listComplaint user: " + user.getUserFirstName());
 
             List<Complaint> listComplaint = service.findAll();
             request.setAttribute("listComplaint", listComplaint);

@@ -7,6 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class ComplaintRepository extends BaseRepository<Complaint> {
     private static final String LOG_ERROR_MSG = "Error during the Complaint %s";
@@ -18,14 +19,37 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
     public void add(Complaint newComplaint) {
         Connection conn = openConnection();
         try{
-            log("Creating prepared statement...");
-//-----------------
-            String complaintsSQL = "INSERT INTO complaints VALUES (?,?,?)";
+            log("Creating prepared statement-1...");
+            String complaintsSQL = "INSERT INTO complaints VALUES (?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(complaintsSQL); // generates sql query
             pstmt.setString(1, newComplaint.getComplaintId());
             pstmt.setString(2, newComplaint.getComplaintPart().getComplaintPart_id());
             pstmt.setString(3, newComplaint.getComplaintDescription());
+            if(pstmt.executeUpdate() == 0){
+                throw new InfrastructureException("The insert wasn't executed!");
+            }else{
+                log("successfully inserted");
+            }
 
+        }catch(SQLException se){
+            log(se.getMessage());
+            logger.error(String.format(LOG_ERROR_MSG, "insert"), se);
+            throw new InfrastructureException(String.format(LOG_ERROR_MSG, "insert"),se);
+        }finally{
+            closeConnection(conn);
+        }
+        add_user_complaint(newComplaint);
+    }
+
+    public void add_user_complaint(Complaint newComplaint) {
+        Connection conn = openConnection();
+        try{
+            log("Creating prepared statement-1...");
+            String complaintsSQL = "INSERT INTO user_complaint VALUES (?,?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(complaintsSQL); // generates sql query
+            pstmt.setString(1, UUID.randomUUID().toString());
+            pstmt.setString(2, newComplaint.getInformer().getUserID());
+            pstmt.setString(3, newComplaint.getComplaintId());
             if(pstmt.executeUpdate() == 0){
                 throw new InfrastructureException("The insert wasn't executed!");
             }else{
@@ -39,6 +63,14 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
             closeConnection(conn);
         }
     }
+
+
+
+
+
+
+
+
 
     /**
      * modify
@@ -161,7 +193,7 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
         {
             log("Creating prepared statement...");
             //String SQL = "SELECT * FROM users WHERE user_username =?";
-            String SQL = "SELECT * FROM users WHERE "+field+"=?";
+            String SQL = "SELECT * FROM complaints WHERE "+field+"=?";
 
             PreparedStatement pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1,criteria);
