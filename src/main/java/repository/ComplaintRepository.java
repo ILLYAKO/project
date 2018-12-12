@@ -12,6 +12,7 @@ import java.util.UUID;
 public class ComplaintRepository extends BaseRepository<Complaint> {
     private static final String LOG_ERROR_MSG = "Error during the Complaint %s";
 
+
     /**
      * add
      * @param newComplaint
