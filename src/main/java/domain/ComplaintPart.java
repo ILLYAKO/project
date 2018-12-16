@@ -9,7 +9,10 @@ public class ComplaintPart {
 
     public ComplaintPart(){}
 
-    public ComplaintPart(String complaintPart_id, String complaintType_id, String complaintPartName, String complaintPartDescription) {
+    public ComplaintPart(String complaintPart_id,
+                         String complaintType_id,
+                         String complaintPartName,
+                         String complaintPartDescription) {
         this.complaintPart_id = complaintPart_id;
         this.complaintType_id = complaintType_id;
         this.complaintPartName = complaintPartName;

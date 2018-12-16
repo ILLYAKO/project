@@ -1,25 +1,23 @@
 package view;
 
 import domain.User;
-
-import exception.EntityNotFoundException;
 import domain.UserType;
+import exception.EntityNotFoundException;
 import service.ProtectedConfigFile;
 import service.Service;
 import service.UserService;
 import view.util.Message;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
 
-public class UserController extends BaseController {
+public class ScheduleController extends BaseController {
     private Service<User> service;
 
     public void init() {
@@ -27,12 +25,14 @@ public class UserController extends BaseController {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doPost(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             String action = extractAction(request);
             switch (action) {
@@ -86,7 +86,6 @@ public class UserController extends BaseController {
     private void listUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<User> listUser = service.findAll();
-
         request.setAttribute("listUser", listUser);
         RequestDispatcher dispatcher = request
                 .getRequestDispatcher("/pages/user/UserList.jsp");
@@ -103,8 +102,7 @@ public class UserController extends BaseController {
         dispatcher.forward(request, response);
     }
 
-    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             String id = request.getParameter("id");
             User existingUser = service.findById(id);
@@ -130,6 +128,7 @@ public class UserController extends BaseController {
             String userFirstName = request.getParameter("userfirstname");
             String userSecondName = request.getParameter("usersecondname");
             String userName = request.getParameter("username");
+            //String userPassword  = request.getParameter("userpassword");
             ProtectedConfigFile protectedConfigFile =
                     new ProtectedConfigFile(request.getParameter("userpassword"));
             String userPassword = protectedConfigFile.getEncryptedPassword();
@@ -156,6 +155,7 @@ public class UserController extends BaseController {
             request.setAttribute("user", user);
             session.setAttribute("user", user);
             dispatcher.forward(request, response);
+
         } catch (Exception e) {
             request.setAttribute("user", user);
             request.setAttribute("message", processException(e));
@@ -174,7 +174,6 @@ public class UserController extends BaseController {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             String userType = request.getParameter("type");
-
             user = new User();
 
             service.modify(user);
@@ -203,7 +202,9 @@ public class UserController extends BaseController {
 
     private void askForLogin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pages/userpages/login.jsp");
+
+        RequestDispatcher dispatcher =
+                request.getRequestDispatcher("/views/pages/schedulepages/schedulelist.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -248,8 +249,7 @@ public class UserController extends BaseController {
         }
     }
 
-    private void logoutUser(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
+    private void logoutUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         RequestDispatcher dispatcher;
         User user = null;
         HttpSession session = request.getSession();

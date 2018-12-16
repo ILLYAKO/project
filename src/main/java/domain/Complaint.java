@@ -10,13 +10,20 @@ public class Complaint {
     private String complaintPartName;
     private String complaintDescription;
 
-    public Complaint() {    }
+    public Complaint() {
+    }
+
+    public Complaint(String complaintId) {
+        this.complaintId = complaintId;
+    }
 
     public Complaint(User informer) {
         this.informer = informer;
     }
 
-    public Complaint(User informer,String complaintTypeShortName, String complaintPartName,
+    public Complaint(User informer,
+                     String complaintTypeShortName,
+                     String complaintPartName,
                      String complaintDescription) {
         this.informer = informer;
         this.complaintTypeShortName = complaintTypeShortName;
@@ -24,8 +31,11 @@ public class Complaint {
         this.complaintDescription = complaintDescription;
     }
 
-    public Complaint(String complaintId, User informer,String complaintTypeShortName, String complaintPartName,
-                     String complaintDescription) {
+    public Complaint(String complaintId,
+                     User informer,
+                     String complaintTypeShortName,
+                     String complaintPartName,
+                     String complaintDescription){
         this.complaintId = complaintId;
         this.informer = informer;
         this.complaintTypeShortName = complaintTypeShortName;
@@ -33,9 +43,11 @@ public class Complaint {
         this.complaintDescription = complaintDescription;
     }
 
-
-    public Complaint(String complaintId, User informer, ComplaintType complaintType,
-                     ComplaintPart complaintPart, String complaintDescription) {
+    public Complaint(String complaintId,
+                     User informer,
+                     ComplaintType complaintType,
+                     ComplaintPart complaintPart,
+                     String complaintDescription) {
         this.complaintId = complaintId;
         this.informer = informer;
         this.complaintType = complaintType;

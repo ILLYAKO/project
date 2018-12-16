@@ -1,4 +1,3 @@
-<% System.out.println("page of Advice List"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -40,15 +39,15 @@
                         <tr>
                             <th>Advice </th>
                             <th>Advice part</th>
-                            <th>Advice description</th>
                             <th>Advice type</th>
+                            <th>Advice description</th>
                             <th>Actions</th>
                         </tr>
                         <c:forEach var="advice" items="${listAdvice}">
                             <tr>
-                                <td><c:out value="${advice.adviceDescription}" /></td>
-                                <td><c:out value="${advice.adviceType}" /></td>
+                                <td><c:out value="${advice.adviceName}" /></td>
                                 <td><c:out value="${advice.advicePart}" /></td>
+                                <td><c:out value="${advice.adviceType}" /></td>
                                  <td><c:out value="${advice.adviceDescription}" /></td>
                                 <td>
                                     <a href="${pageContext.request.contextPath}/advice/edit?id=<c:out value='${advice.adviceId}' />">Edit</a>

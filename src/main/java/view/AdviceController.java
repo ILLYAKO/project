@@ -1,7 +1,6 @@
 package view;
 
 import domain.Advice;
-import domain.Complaint;
 import domain.User;
 import exception.EntityNotFoundException;
 import service.AdviceService;
@@ -27,19 +26,13 @@ public class AdviceController extends BaseController {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("--doGet--");
         doPost(request, response);
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        //HttpSession session = request.getSession();
-        System.out.println("--doPost--");
         try {
             String action = extractAction(request);
-
             switch (action) {
                 case "/add":
                     showAdviceForm(request, response);
@@ -60,7 +53,7 @@ public class AdviceController extends BaseController {
                     listAdvice(request, response);
                     break;
                 default:
-                   // showAdviceForm(request, response);
+                    // showAdviceForm(request, response);
                     break;
             }
         } catch (ServletException ex) {
@@ -69,76 +62,65 @@ public class AdviceController extends BaseController {
             throw new ServletException(ex);
         }
     }
+
     private String extractAction(HttpServletRequest request) {
-            String pathInfo = request.getPathInfo();
-            if (pathInfo == null) {
-                return "/askForLogin";
-            } else {
-                return pathInfo;
-            }
+        String pathInfo = request.getPathInfo();
+        if (pathInfo == null) {
+            return "/askForLogin";
+        } else {
+            return pathInfo;
+        }
     }
 
     private void listAdvice(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("-AdviceController.listAdvice-");
-//            HttpSession session = request.getSession();
-//            User user = (User)session.getAttribute("user");
-
-            List<Advice> listAdvice = service.findAll();
-            request.setAttribute("listAdvice", listAdvice);
-            RequestDispatcher dispatcher = request
-                    .getRequestDispatcher("/views/pages/advicepages/adviceList.jsp");
-            dispatcher.forward(request, response);
+        List<Advice> listAdvice = service.findAll();
+        request.setAttribute("listAdvice", listAdvice);
+        RequestDispatcher dispatcher = request
+                .getRequestDispatcher("/views/pages/advicepages/adviceList.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showAdviceForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        RequestDispatcher dispatcher = request
+                .getRequestDispatcher("/views/pages/advicepages/adviceForm.jsp");
+        request.setAttribute("isNew", true);
+        dispatcher.forward(request, response);
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            String id = request.getParameter("adviceId");
+            Advice existingAdvice = service.findById(id);
             RequestDispatcher dispatcher = request
-                    .getRequestDispatcher("/views/pages/advicepages/adviceForm.jsp");
-           // request.setAttribute("types", AdviceType.getAdviceTypeFullName());
-            request.setAttribute("isNew", true);
+                    .getRequestDispatcher("/pages/advicepages/adviceForm.jsp");
             dispatcher.forward(request, response);
+        } catch (EntityNotFoundException e) {
+            request.setAttribute("message", e.getMessage());
+            listAdvice(request, response);
+        }
     }
 
-    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-            try {
-                String id = request.getParameter("adviceId");
-                Advice existingAdvice = service.findById(id);
-                RequestDispatcher dispatcher = request
-                        .getRequestDispatcher("/pages/advicepages/adviceForm.jsp");
-                //request.setAttribute("types", UserType.values());
-                //request.setAttribute("user", existingAdvice);
-                //request.setAttribute("isEdit", true);
-                dispatcher.forward(request, response);
-            } catch (EntityNotFoundException e) {
-                request.setAttribute("message", e.getMessage());
-                listAdvice(request, response);
-            }
-
-    }
-
-    private void insertAdvice(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    private void insertAdvice(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
         Advice advice = null;
-        System.out.println("--insertAdvice--");
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("user");
-        System.out.println("--AdviceController.insertAdvice user: " + user.getUserFirstName());
+        User user = (User) session.getAttribute("user");
         //A universally unique identifier (UUID) is a 128-bit number used to identify information in computer systems
         String adviceId = UUID.randomUUID().toString();
-        String adviceName =   request.getParameter("adviceName");
+        String adviceName = request.getParameter("adviceName");
         String adviceType = request.getParameter("adviceType");
-        String advicePart =        request.getParameter("advicePart");
+        String advicePart = request.getParameter("advicePart");
         String adviceDescription = request.getParameter("adviceDescription");
 
-        if(adviceName.isEmpty() || advicePart.isEmpty() || adviceDescription.isEmpty()){
+        if (adviceName.isEmpty() || advicePart.isEmpty() || adviceDescription.isEmpty()) {
             request.setAttribute("user", user);
-            RequestDispatcher rd = request.getRequestDispatcher("/views/pages/advicepages/adviceList.jsp");//adviceForm.jsp
-
-            //out.println("<font color=red>Please fill all the fields</font>");
+            RequestDispatcher rd = request.getRequestDispatcher("/views/pages/advicepages/adviceList.jsp");
             rd.forward(request, response);
-        }else{
+        } else {
             Advice newAdvice = new Advice(
                     adviceId,
                     adviceName,
@@ -152,106 +134,69 @@ public class AdviceController extends BaseController {
         }
     }
 
-    private void updateAdvice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void updateAdvice(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         Advice advice = null;
-            try {
-                String id = request.getParameter("id");
-                String email = request.getParameter("email");
-                //
-//            ProtectedConfigFile protectedConfigFile = null;
-//            protectedConfigFile = new ProtectedConfigFile(request.getParameter("password"));
-//            String password = protectedConfigFile.getEncryptedPassword();
-                String password = request.getParameter("password");
-
-                //
-
-
-
-                String userType = request.getParameter("type");
-
-//                user = new User(id,
-//                        email, password, UserType.valueOf(userType));
-                advice = new Advice();
-
-
-                service.modify(advice);
-                request.setAttribute("message", Message.buildSuccessMessage("User updated successfully"));
-                listAdvice(request, response);
-            } catch (Exception e) {
-                request.setAttribute("user", advice);
-                request.setAttribute("message", processException(e));
-                request.setAttribute("isEdit", true);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/user/UserForm.jsp");
-                dispatcher.forward(request, response);
-            }
+        try {
+            String id = request.getParameter("id");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            String userType = request.getParameter("type");
+            advice = new Advice();
+            service.modify(advice);
+            request.setAttribute("message", Message.buildSuccessMessage("User updated successfully"));
+            listAdvice(request, response);
+        } catch (Exception e) {
+            request.setAttribute("user", advice);
+            request.setAttribute("message", processException(e));
+            request.setAttribute("isEdit", true);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/user/UserForm.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
-    private void deleteAdvice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            try {
-                String id = request.getParameter("adviceId");
-                service.remove(id);
-                request.setAttribute("message", Message.buildSuccessMessage("User deleted successfully"));
-            } catch (Exception e) {
-                request.setAttribute("message", processException(e));
-            }
+    private void deleteAdvice(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            String id = request.getParameter("adviceId");
+            service.remove(id);
+            request.setAttribute("message", Message.buildSuccessMessage("User deleted successfully"));
+        } catch (Exception e) {
+            request.setAttribute("message", processException(e));
+        }
         listAdvice(request, response);
-
     }
 
     private void askForLogin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pages/userpages/login.jsp");
-            dispatcher.forward(request, response);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pages/userpages/login.jsp");
+        dispatcher.forward(request, response);
     }
 
-    private void loginUser(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-        System.out.println("-loginUser-");
-
-       // HttpSession session = request.getSession();
-
+    private void loginUser(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String userEmail = request.getParameter("userEmail");
         String password = request.getParameter("password");
-
-        System.out.println("userEmail: " + userEmail);
-        System.out.println("password: " + password);
-
-        User requiredUser = new User(userEmail,password);
-        System.out.println("requiredUser.getUserEmail(): " + requiredUser.getUserEmail());
-        System.out.println("requiredUser.getUserPassword(): " + requiredUser.getUserPassword());
-
-        UserService userService =new UserService();
+        User requiredUser = new User(userEmail, password);
+        UserService userService = new UserService();
         User existingUser = null;
         RequestDispatcher dispatcher;
         try {
             existingUser = userService.login(requiredUser);
-
-            if (existingUser != null){
-                System.out.println("-existingUser-");
+            if (existingUser != null) {
                 request.setAttribute("user", existingUser);
                 dispatcher = request.getRequestDispatcher("/views/pages/userpages/userRegistered.jsp");
                 dispatcher.forward(request, response);
-            }else {
-                //request.setAttribute("message", "CREATE USER");
-                System.out.println("Something wrong -01 in loginUser");
+            } else {
                 request.setAttribute("isWrong", true);
-
                 try {
-                    System.out.println("Something wrong -02 in loginUser");
-                    //showRegistrationForm(request, response);
-                }
-                //catch (ServletException e1)
-                 catch (Exception e1){
+                } catch (Exception e1) {
                     e1.printStackTrace();
                 }
-
-                System.out.println("-NULL-");
             }
         } catch (Exception e) {
             request.setAttribute("message", e.getMessage());
             try {
-                System.out.println("Something wrong -03 in loginUser");
                 request.setAttribute("isWrong", true);
                 askForLogin(request, response);
             } catch (ServletException e1) {
@@ -261,21 +206,14 @@ public class AdviceController extends BaseController {
     }
 
     private void logoutUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        System.out.println("-logoutUser-");
         RequestDispatcher dispatcher;
         User user = null;
         HttpSession session = request.getSession();
-
-        if(session != null){
-            session.invalidate();}
+        if (session != null) {
+            session.invalidate();
+        }
         request.setAttribute("user", user);
         dispatcher = request.getRequestDispatcher("/index.jsp");//.forward(request,response);
         dispatcher.forward(request, response);
     }
-
-
-
-
-
-    }
-
+}

@@ -1,25 +1,23 @@
 package view;
 
 import domain.User;
-
-import exception.EntityNotFoundException;
 import domain.UserType;
+import exception.EntityNotFoundException;
 import service.ProtectedConfigFile;
 import service.Service;
 import service.UserService;
 import view.util.Message;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
 
-public class UserController extends BaseController {
+public class ProgressController extends BaseController {
     private Service<User> service;
 
     public void init() {
@@ -27,12 +25,14 @@ public class UserController extends BaseController {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doPost(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             String action = extractAction(request);
             switch (action) {
@@ -86,7 +86,6 @@ public class UserController extends BaseController {
     private void listUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<User> listUser = service.findAll();
-
         request.setAttribute("listUser", listUser);
         RequestDispatcher dispatcher = request
                 .getRequestDispatcher("/pages/user/UserList.jsp");
@@ -95,9 +94,8 @@ public class UserController extends BaseController {
 
     private void showRegistrationForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        RequestDispatcher dispatcher = request
-                .getRequestDispatcher("/views/pages/userpages/registrationForm.jsp");
+        RequestDispatcher dispatcher =
+                request.getRequestDispatcher("/views/pages/userpages/registrationForm.jsp");
         request.setAttribute("types", UserType.values());
         request.setAttribute("isNew", true);
         dispatcher.forward(request, response);
@@ -108,8 +106,8 @@ public class UserController extends BaseController {
         try {
             String id = request.getParameter("id");
             User existingUser = service.findById(id);
-            RequestDispatcher dispatcher = request
-                    .getRequestDispatcher("/pages/user/UserForm.jsp");
+            RequestDispatcher dispatcher =
+                    request.getRequestDispatcher("/pages/user/UserForm.jsp");
             request.setAttribute("types", UserType.values());
             request.setAttribute("user", existingUser);
             request.setAttribute("isEdit", true);
@@ -130,6 +128,7 @@ public class UserController extends BaseController {
             String userFirstName = request.getParameter("userfirstname");
             String userSecondName = request.getParameter("usersecondname");
             String userName = request.getParameter("username");
+
             ProtectedConfigFile protectedConfigFile =
                     new ProtectedConfigFile(request.getParameter("userpassword"));
             String userPassword = protectedConfigFile.getEncryptedPassword();
@@ -160,8 +159,7 @@ public class UserController extends BaseController {
             request.setAttribute("user", user);
             request.setAttribute("message", processException(e));
             request.setAttribute("isNew", true);
-            dispatcher = request
-                    .getRequestDispatcher("/views/pages/userpages/registrationForm.jsp");
+            dispatcher = request.getRequestDispatcher("/views/pages/userpages/registrationForm.jsp");
             dispatcher.forward(request, response);
         }
     }
@@ -174,7 +172,6 @@ public class UserController extends BaseController {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             String userType = request.getParameter("type");
-
             user = new User();
 
             service.modify(user);
@@ -199,11 +196,14 @@ public class UserController extends BaseController {
             request.setAttribute("message", processException(e));
         }
         listUser(request, response);
+
     }
 
     private void askForLogin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/pages/userpages/login.jsp");
+
+        RequestDispatcher dispatcher =
+                request.getRequestDispatcher("/views/pages/progresspages/progresslist.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -231,6 +231,7 @@ public class UserController extends BaseController {
                 request.setAttribute("isWrong", true);
                 dispatcher = request.getRequestDispatcher("/views/pages/userpages/login.jsp");
                 dispatcher.forward(request, response);
+
                 try {
                     showRegistrationForm(request, response);
                 } catch (ServletException e1) {

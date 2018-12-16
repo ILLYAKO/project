@@ -42,4 +42,26 @@
     <url-pattern>/advice/*</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>ScheduleController</servlet-name>
+    <display-name>ScheduleController</display-name>
+    <description></description>
+    <servlet-class>view.ScheduleController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ScheduleController</servlet-name>
+    <url-pattern>/schedule/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ProgressController</servlet-name>
+    <display-name>ProgressController</display-name>
+    <description></description>
+    <servlet-class>view.ProgressController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProgressController</servlet-name>
+    <url-pattern>/progress/*</url-pattern>
+  </servlet-mapping>
+
 </web-app>

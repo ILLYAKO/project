@@ -1,6 +1,6 @@
-<% System.out.println("page of Complaint List"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="java.util.logging.Logger" %>
 
 <%--
 <!doctype html>
@@ -10,29 +10,20 @@
        <title>Complaint List</title>
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-       <%-- <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">     --%>
-
        <link href="/test14/public/css/style.css" rel="stylesheet">
-
     </head>
     <body>
         <div id="header" class="header">
             <jsp:include page="/views/layouts/header.jsp"/>
         </div>
-
         <div id="main" class="col-md-8 col-md-offset-2">
-
                     <h2>COMPLAINTS:</h2>
-
                     <c:if test="${message != null}">
-                        <div class="alert <c:out value='${message.type.reference}' />">
+                      <div class="alert <c:out value='${message.type.reference}' />">
+                        <div class="alert">
                           <strong><c:out value='${message.text}' /></strong>
                         </div>
-                        <center>
-                            <div>
-                                <span></span>
-                            <div>
-                        </center>
+                      </div>
                     </c:if>
                     <div class="ex">
                     <table class="table table-hover">
@@ -46,10 +37,16 @@
                         </tr>
                         <c:forEach var="complaint" items="${listComplaint}">
                             <tr>
-                                <td><c:out value="${complaint.complaintType}" /></td>
-                                <td><c:out value="${complaint.complaintPart}" /></td>
-                                <td><c:out value="${complaint.complaintDescription}" /></td>
-                                 <td><c:out value="${complaint.complaintDescription}" /></td>
+                                <td><c:out value="${complaint.complaintType.complaintTypeShortName}" /></td>
+                                <td><c:out value="${complaint.complaintPart.getComplaintPartName()}" /></td>
+                                <td><c:out value="${complaint.complaintPart.getComplaintPartDescription()}" /></td>
+
+                                    <c:forEach var="advice" items="${listAdvice}">
+                                        <c:if test="${advice.getAdvicePart() == complaint.complaintPart.getComplaintPartName()}">
+                                            <td><c:out value="${advice.adviceName}" /></td>
+                                        </c:if>
+                                    </c:forEach>
+
                                 <td>
                                     <a href="${pageContext.request.contextPath}/complaint/edit?id=<c:out value='${complaint.complaintId}' />">Edit</a>
                                     &nbsp;&nbsp;&nbsp;&nbsp;

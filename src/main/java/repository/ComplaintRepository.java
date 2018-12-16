@@ -2,6 +2,8 @@ package repository;
 
 import domain.*;
 import exception.InfrastructureException;
+import service.ComplaintPartService;
+import service.ComplaintTypeService;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,10 +13,7 @@ import java.util.UUID;
 
 public class ComplaintRepository extends BaseRepository<Complaint> {
     private static final String LOG_ERROR_MSG = "Error during the Complaint %s";
-    /**
-     * add
-     * @param newComplaint
-     */
+
     public void add(Complaint newComplaint) {
         Connection conn = openConnection();
         try{
@@ -63,18 +62,6 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
         }
     }
 
-
-
-
-
-
-
-
-
-    /**
-     * modify
-     * @param newComplaint
-     */
     public void modify(Complaint newComplaint){
 
         Connection conn = openConnection();
@@ -87,15 +74,7 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
             PreparedStatement pstmt = conn.prepareStatement(SQL); // generates sql query
 
 //            pstmt.setString(1,user.getUserFirstName());
-//            pstmt.setString(2,user.getUserSecondName());
-//            pstmt.setString(3,user.getUserName());
-//            pstmt.setString(4,user.getUserPassword());
-//            pstmt.setString(5,Integer.toString(user.getUserAge()));
-//            pstmt.setString(6,user.getUserGender());
-//            pstmt.setString(7,user.getUserEmail());
-//            pstmt.setString(8,user.getUserAddress());
-//            pstmt.setString(9,user.getUserType().name());
-//            pstmt.setString(10, user.getUserID());
+
 
             if(pstmt.executeUpdate() == 0){
                 throw new InfrastructureException("The Update wasn't executed!");
@@ -118,10 +97,10 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
 
         try{
             log("Creating prepared statement...");
-            String SQL = "DELETE FROM users WHERE user_id= ?";
+            String SQL = "DELETE FROM user_complaint WHERE complaint_id= ?";
 
             PreparedStatement pstmt = conn.prepareStatement(SQL); // generates sql query
-            //pstmt.setString(1, user.getUserID());
+            pstmt.setString(1, newComplaint.getComplaintId());
 
             if(pstmt.executeUpdate() == 0){
                 throw new InfrastructureException("The delete wasn't executed!");
@@ -139,8 +118,6 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
     }
 
     public Optional<Complaint> findById(String id){
-
-        //User wantedUser = null;
         Complaint wantedComplaint= null;
 
         Connection conn = openConnection();
@@ -148,27 +125,18 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
         try
         {
             log("Creating prepared statement...");
-            String SQL = "SELECT * FROM users WHERE user_id =?";
+            String SQL = "SELECT * FROM complaints WHERE complaint_id =?";
 
             PreparedStatement pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1,id);
 
             ResultSet rs = pstmt.executeQuery();
 
-            if(rs.next()) //while(rs.next())
+            if(rs.next())
             {
                 // from DB
-//                wantedUser= new User(rs.getString("user_id"),
-//                        rs.getString("user_firstname"),
-//                        rs.getString("user_secondname"),
-//                        rs.getString("user_username"),
-//                        rs.getString("user_password"),
-//                        Integer.parseInt(rs.getString("user_age")),
-//                        rs.getString("user_gender"),
-//                        rs.getString("user_email"),
-//                        rs.getString("user_address"),
-//                        UserType.valueOf(rs.getString("user_type"))
-//                );
+                wantedComplaint= new Complaint(rs.getString("complaint_id")
+                );
                 return Optional.of(wantedComplaint);
             }
         }catch(SQLException se){
@@ -182,8 +150,6 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
     }
 
     public Optional<Complaint> findByCriteria(String field, String criteria){
-
-        //User wantedUser = null;
         Complaint wantedComplaint= null;
 
         Connection conn = openConnection();
@@ -191,7 +157,6 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
         try
         {
             log("Creating prepared statement...");
-            //String SQL = "SELECT * FROM users WHERE user_username =?";
             String SQL = "SELECT * FROM complaints WHERE "+field+"=?";
 
             PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -199,19 +164,11 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
 
             ResultSet rs = pstmt.executeQuery();
 
-            if(rs.next()) //while(rs.next())
+            if(rs.next())
             {
                 // from DB
 //                wantedUser= new User(rs.getString("user_id"),
-//                        rs.getString("user_firstname"),
-//                        rs.getString("user_secondname"),
-//                        rs.getString("user_username"),
-//                        rs.getString("user_password"),
-//                        Integer.parseInt(rs.getString("user_age")),
-//                        rs.getString("user_gender"),
-//                        rs.getString("user_email"),
-//                        rs.getString("user_address"),
-//                        UserType.valueOf(rs.getString("user_type"))
+//                        rs.getString("user_firstname")
 //                );
                 return Optional.of(wantedComplaint);
             }
@@ -227,9 +184,7 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
 
     public List<Complaint> findAll(){
         List<Complaint> complaints = new ArrayList<>();
-
         Connection conn = openConnection();
-
         try
         {
             log("Creating statement...");
@@ -246,9 +201,9 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
                         new Complaint(
                                 rs.getString("complaint_id"),
                                 new User(),
-                        "123",
-                        "456",
-                        "789"
+                                new ComplaintType(),
+                                new ComplaintPart(),
+                        "DESCRIPTION"
                                 )
                         );
             }
@@ -264,17 +219,74 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
         return complaints;
     }
 
+    public List<Complaint> findAllComplaintOfUser(User user){
+        List<Complaint> userComplaints = new ArrayList<>();
+        Connection conn = openConnection();
+        Complaint complaint=null;
+        String complaintID;
+        String problematicPartId;
+        ComplaintPartService complaintPartService = new ComplaintPartService();
+        ComplaintTypeService complaintTypeService = new ComplaintTypeService();
+        ComplaintPart complaintPart = null;
+        ComplaintType complaintType = null;
+        try
+        {
+            log("Creating statement..7.");
+            String SQL = "SELECT * FROM user_complaint WHERE user_id =?";
+            PreparedStatement pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1,user.getUserID());
+            ResultSet rs = pstmt.executeQuery();
 
+            while(rs.next())
+            {
+                complaintID = rs.getString("complaint_id");
+                problematicPartId =problematicPartId(complaintID);
+                complaintPart = complaintPartService.findById(problematicPartId);
+                complaintType = complaintTypeService.findById(complaintPart.getComplaintType_id());
 
+                complaint =  new Complaint(complaintID,user,
+                        complaintType,
+                        complaintPart,
+                        complaintPart.getComplaintPartDescription()
+                );
+                userComplaints.add(complaint);
+            }
+        }
+        catch(SQLException se){
+            log(se.getMessage());
+            logger.error(String.format(LOG_ERROR_MSG, "findAll"), se);
+            throw new InfrastructureException(String.format(LOG_ERROR_MSG, "findAll"),se);
+        }finally
+        {
+            closeConnection(conn);
+        }
+        return userComplaints;
+    }
 
+    public String problematicPartId(String complaintId){
+        Connection conn = openConnection();
+        try
+        {
+            log("Creating prepared statement...");
+            String SQL = "SELECT * FROM complaints WHERE complaint_id =?";
+            PreparedStatement pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1,complaintId);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()) //while(rs.next())
+            {
+                // from DB
+                return rs.getString("problematicpart_id");
+            }
+        }catch(SQLException se){
+            log(se.getMessage());
+            logger.error(String.format(LOG_ERROR_MSG, "findById"), se);
+            throw new InfrastructureException(String.format(LOG_ERROR_MSG, "findById"),se);
+        }finally{
+            closeConnection(conn);
+        }
+        return null;
+    }
 
-
-
-
-    /**
-     * Find All Problem Types
-     * @return problemTypes
-     */
     public List<ComplaintType> findProblemAllTypeList(){
 
         List<ComplaintType> problemTypes = new ArrayList<>();
@@ -284,11 +296,8 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
         {
             log("Creating statement...");
             String SQL = "SELECT * FROM problemtypes";
-
             Statement stmt = conn.createStatement();
-
             ResultSet rs = stmt.executeQuery(SQL);
-
             while(rs.next())
             {
                 // from DB
@@ -308,11 +317,9 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
         return problemTypes;
     }
 
-
     public List<ComplaintPart> findAllComplaintPartList() {
         List <ComplaintPart> complaintParts = new ArrayList<>();
         Connection conn = openConnection();
-
         try
         {
             log("Creating statement...");
@@ -340,8 +347,4 @@ public class ComplaintRepository extends BaseRepository<Complaint> {
         }
         return complaintParts;
     }
-
-
-
-
 }

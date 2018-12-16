@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -25,7 +26,7 @@
         <div class="title-container">
             <h1>
                 <c:if test="${user!='null'}">
-                    Hello ${user.getUserFirstName()}<br>
+                    Hello ${user.getUserFirstName()}.<br>
                 </c:if>
                 <c:if test="${isWrong}">
                     Wrong combination email & password. OR<br>
@@ -39,10 +40,8 @@
             </h1>
         </div>
 
-        <h2>User Details:</h2>
-        The first name: ${user.getUserFirstName()}<br>
-        The family name: ${user.getUserSecondName()}<br>
-        User email: ${user.getUserEmail()}<br>
+        <h2>THE PROGRESS PAGE IS COMING SOON.</h2>
+
         </div>
 
 

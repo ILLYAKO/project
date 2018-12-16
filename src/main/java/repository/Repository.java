@@ -1,5 +1,7 @@
 package repository;
 
+import domain.User;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -17,4 +19,5 @@ public interface Repository<T> {
 
     List<T> findAll();
 
+    List<T> findAllComplaintOfUser(User user);
 }

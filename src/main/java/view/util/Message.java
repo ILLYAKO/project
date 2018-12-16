@@ -22,20 +22,19 @@ public class Message {
         return type;
     }
 
-    public static Message buildSuccessMessage(String text){
+    public static Message buildSuccessMessage(String text) {
         return new Message(text, MessageType.SUCCESS);
     }
 
-    public static Message buildWarningMessage(String text){
+    public static Message buildWarningMessage(String text) {
         return new Message(text, MessageType.WARNING);
     }
 
-    public static Message buildInfoMessage(String text){
+    public static Message buildInfoMessage(String text) {
         return new Message(text, MessageType.INFO);
     }
 
-    public static Message buildDangerMessage(String text){
+    public static Message buildDangerMessage(String text) {
         return new Message(text, MessageType.DANGER);
     }
-
 }

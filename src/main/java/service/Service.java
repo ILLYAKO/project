@@ -1,5 +1,7 @@
 package service;
 
+import domain.User;
+
 import java.util.List;
 
 public interface Service<T> {
@@ -13,4 +15,6 @@ public interface Service<T> {
     T findById(String id);
 
     List<T> findAll();
+
+    List<T> findAllComplaintOfUser(User user);
 }

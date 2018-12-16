@@ -9,14 +9,20 @@ public class Advice {
     private String advicePart;
     private String adviceDescription;
 
-    public Advice() {    }
+    public Advice() {
+    }
 
     public Advice(String adviceId, String adviceName) {
         this.adviceId = adviceId;
         this.adviceName = adviceName;
     }
 
-    public Advice(String adviceId, String adviceName, User advisor, String adviceType, String advicePart, String adviceDescription) {
+    public Advice(String adviceId,
+                  String adviceName,
+                  User advisor,
+                  String adviceType,
+                  String advicePart,
+                  String adviceDescription) {
         this.adviceId = adviceId;
         this.adviceName = adviceName;
         Advisor = advisor;
@@ -29,7 +35,9 @@ public class Advice {
         return adviceId;
     }
 
-    public void setAdviceId(String adviceId) { this.adviceId = adviceId; }
+    public void setAdviceId(String adviceId) {
+        this.adviceId = adviceId;
+    }
 
     public String getAdviceName() {
         return adviceName;

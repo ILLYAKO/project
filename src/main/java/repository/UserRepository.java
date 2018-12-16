@@ -17,10 +17,6 @@ public class UserRepository extends BaseRepository<User> {
 
     private static final String LOG_ERROR_MSG = "Error during the user %s";
 
-    /**
-     * Add User
-     * @param user
-     */
     public void add(User user) {
 
         Connection conn = openConnection();
@@ -54,11 +50,6 @@ public class UserRepository extends BaseRepository<User> {
         }
     }
 
-    /**
-     * Modify User
-     * @param user
-     * @throws Exception
-     */
     public void modify(User user){
 
         Connection conn = openConnection();
@@ -96,11 +87,6 @@ public class UserRepository extends BaseRepository<User> {
         }
     }
 
-    /**
-     * Remove User
-     * @param user
-     * @throws Exception
-     */
     public void remove(User user) {
 
         Connection conn = openConnection();
@@ -127,11 +113,6 @@ public class UserRepository extends BaseRepository<User> {
         }
     }
 
-    /**
-     * Find User By ID
-     * @param id
-     * @return
-     */
     public Optional<User> findById(String id){
 
         User wantedUser = null;
@@ -174,11 +155,6 @@ public class UserRepository extends BaseRepository<User> {
         return Optional.empty();
     }
 
-    /**
-     * Find User By Criteria
-     * @param criteria
-     * @return
-     */
     public Optional<User> findByCriteria(String field, String criteria){
 
         User wantedUser = null;
@@ -188,19 +164,16 @@ public class UserRepository extends BaseRepository<User> {
         try
         {
             log("Creating prepared statement...");
-            //String SQL = "SELECT * FROM users WHERE user_username =?";
             String SQL = "SELECT * FROM users WHERE "+field+"=?";
 
             PreparedStatement pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1,criteria);
 
             ResultSet rs = pstmt.executeQuery();
-            System.out.println("UserRepository.findByCriteria -01");
 
-            if(rs.next()) //while(rs.next())
+            if(rs.next())
             {
                 // from DB
-                System.out.println("UserRepository.findByCriteria -02");
                 wantedUser= new User(rs.getString("user_id"),
                                     rs.getString("user_firstname"),
                                     rs.getString("user_secondname"),
@@ -212,30 +185,18 @@ public class UserRepository extends BaseRepository<User> {
                                     rs.getString("user_address"),
                                     UserType.valueOf(rs.getString("user_type"))
                 );
-                System.out.println("UserRepository.findByCriteria -03");
-                System.out.println("UserRepository.findByCriteria wantedUser.getUserEmail: " + wantedUser.getUserEmail());
-
                 return Optional.of(wantedUser);
             }
         }catch(SQLException se){
-            System.out.println("UserRepository.findByCriteria -04");
             log(se.getMessage());
             logger.error(String.format(LOG_ERROR_MSG, "findById"), se);
             throw new InfrastructureException(String.format(LOG_ERROR_MSG, "findById"), se);
         }finally{
-            System.out.println("UserRepository.findByCriteria -05");
             closeConnection(conn);
         }
-        System.out.println("UserRepository.findByCriteria -06");
         return Optional.empty();
     }
 
-
-
-    /**
-     * Find All Users
-     * @return
-     */
     public List<User> findAll(){
         List<User> users = new ArrayList<>();
 
@@ -276,5 +237,10 @@ public class UserRepository extends BaseRepository<User> {
             closeConnection(conn);
         }
         return users;
+    }
+
+    @Override
+    public List<User> findAllComplaintOfUser(User user) {
+        return null;
     }
 }

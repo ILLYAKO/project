@@ -7,7 +7,7 @@
         <li><a href="${pageContext.request.contextPath}">HOME</a></li>
         <li><a href="${pageContext.request.contextPath}/user/askForLogin">LOGIN</a></li>
         <li><a href="${pageContext.request.contextPath}/user/logout">LOGOUT</a></li>
-        <li><a href="${pageContext.request.contextPath}/complaint/listComplaint">COMPLAINTS</a></li>
+        <li><a href="${pageContext.request.contextPath}/complaint/listComplaintOfUser">COMPLAINTS</a></li>
         <li><a href="${pageContext.request.contextPath}/advice/listAdvice">ADVICE</a></li>
         <li><a href="${pageContext.request.contextPath}/schedule/userSchedule">SCHEDULE</a></li>
         <li><a href="${pageContext.request.contextPath}/progress/userProgress">PROGRESS</a></li>
