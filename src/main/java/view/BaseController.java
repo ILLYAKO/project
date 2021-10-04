@@ -6,7 +6,6 @@ import exception.InfrastructureException;
 import exception.ValidationException;
 import org.apache.log4j.Logger;
 import view.util.Message;
-import view.util.MessageType;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,15 +34,13 @@ public class BaseController extends HttpServlet {
     }
 
 
-    protected void verifyLoggedUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        User user = (User)request
+    protected void verifyLoggedUser(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+        User user = (User) request
                 .getSession()
                 .getAttribute("loggedUser");
-
-        if (user == null){
-            RequestDispatcher dispatcher = request
-                    .getRequestDispatcher("/pages/common/loginForm.jsp");
-
+        if (user == null) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/common/loginForm.jsp");
             dispatcher.forward(request, response);
         }
     }

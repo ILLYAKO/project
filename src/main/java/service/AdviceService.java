@@ -1,7 +1,7 @@
 package service;
 
-import com.google.common.annotations.VisibleForTesting;
 import domain.Advice;
+import domain.User;
 import exception.EntityNotFoundException;
 import repository.AdviceRepository;
 import repository.Repository;
@@ -20,27 +20,7 @@ public class AdviceService implements Service<Advice> {
         this.adviceRepository = adviceRepository;
     }
 
-    @VisibleForTesting
-    void validate(Advice advice) {
-//        if (advice.getYear() < MAX_YEAR_ALLOWED) {
-//            throw new ValidationException("The advice cannot be older than year 2000");
-//        }
-//
-//        if (isDuplicatedPlate(advice)) {
-//            throw new ValidationException("There is another advice with the same plate, please, choose another one");
-//        }
-    }
-
-    @VisibleForTesting
-//    boolean isDuplicatedPlate(Advice advice) {
-//        return adviceRepository
-//                .findByCriteria("plate", advice.getPlate())
-//                .filter(c -> !c.getId().equals(advice.getId()))
-//                .isPresent();
-//    }
-
     public void add(Advice advice) {
-        //validate(advice);
         adviceRepository.add(advice);
     }
 
@@ -50,7 +30,6 @@ public class AdviceService implements Service<Advice> {
                 .orElseThrow(
                         () -> new EntityNotFoundException("Advice with id " + advice.getAdviceId() + " was not found!"));
 
-        validate(advice);
         adviceRepository.modify(advice);
     }
 
@@ -68,5 +47,10 @@ public class AdviceService implements Service<Advice> {
 
     public List<Advice> findAll() {
         return adviceRepository.findAll();
+    }
+
+    @Override
+    public List<Advice> findAllComplaintOfUser(User user) {
+        return null;
     }
 }

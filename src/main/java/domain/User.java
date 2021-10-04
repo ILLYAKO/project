@@ -13,8 +13,6 @@ public class User {
     private String userAddress;
     private UserType userType;
 
-
-
     public User() { }
 
     public User(String userEmail, String userPassword) {

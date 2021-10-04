@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_healthyhabits" default="compile.module.healthyhabits">
+  <dirname property="module.healthyhabits.basedir" file="${ant.file.module_healthyhabits}"/>
+  
+  <property name="module.jdk.home.healthyhabits" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.healthyhabits" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.healthyhabits" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.healthyhabits" value="-encoding UTF-8 -source 8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="healthyhabits.output.dir" value="${module.healthyhabits.basedir}/target/classes"/>
+  <property name="healthyhabits.testoutput.dir" value="${module.healthyhabits.basedir}/target/test-classes"/>
+  
+  <path id="healthyhabits.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="healthyhabits.module.production.classpath">
+    <path refid="${module.jdk.classpath.healthyhabits}"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:8.0.11.classpath"/>
+    <path refid="library.maven:_javax.servlet:javax.servlet-api:3.1.0.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:jsp-api:2.2.1-b03.classpath"/>
+    <path refid="library.maven:_jstl:jstl:1.2.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.17.classpath"/>
+    <path refid="library.maven:_org.mockito:mockito-all:1.9.5.classpath"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:27.0-jre.classpath"/>
+    <path refid="library.maven:_com.google.guava:failureaccess:1.0.classpath"/>
+    <path refid="library.maven:_com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.2.classpath"/>
+    <path refid="library.maven:_org.checkerframework:checker-qual:2.5.2.classpath"/>
+    <path refid="library.maven:_com.google.errorprone:error_prone_annotations:2.2.0.classpath"/>
+    <path refid="library.maven:_com.google.j2objc:j2objc-annotations:1.1.classpath"/>
+    <path refid="library.maven:_org.codehaus.mojo:animal-sniffer-annotations:1.17.classpath"/>
+  </path>
+  
+  <path id="healthyhabits.runtime.production.module.classpath">
+    <pathelement location="${healthyhabits.output.dir}"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:8.0.11.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:2.6.0.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:jsp-api:2.2.1-b03.classpath"/>
+    <path refid="library.maven:_jstl:jstl:1.2.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.17.classpath"/>
+    <path refid="library.maven:_org.mockito:mockito-all:1.9.5.classpath"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:27.0-jre.classpath"/>
+    <path refid="library.maven:_com.google.guava:failureaccess:1.0.classpath"/>
+    <path refid="library.maven:_com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.2.classpath"/>
+    <path refid="library.maven:_org.checkerframework:checker-qual:2.5.2.classpath"/>
+    <path refid="library.maven:_com.google.errorprone:error_prone_annotations:2.2.0.classpath"/>
+    <path refid="library.maven:_com.google.j2objc:j2objc-annotations:1.1.classpath"/>
+    <path refid="library.maven:_org.codehaus.mojo:animal-sniffer-annotations:1.17.classpath"/>
+  </path>
+  
+  <path id="healthyhabits.module.classpath">
+    <path refid="${module.jdk.classpath.healthyhabits}"/>
+    <pathelement location="${healthyhabits.output.dir}"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:8.0.11.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:2.6.0.classpath"/>
+    <path refid="library.maven:_javax.servlet:javax.servlet-api:3.1.0.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:jsp-api:2.2.1-b03.classpath"/>
+    <path refid="library.maven:_jstl:jstl:1.2.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.17.classpath"/>
+    <path refid="library.maven:_org.mockito:mockito-all:1.9.5.classpath"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:27.0-jre.classpath"/>
+    <path refid="library.maven:_com.google.guava:failureaccess:1.0.classpath"/>
+    <path refid="library.maven:_com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.2.classpath"/>
+    <path refid="library.maven:_org.checkerframework:checker-qual:2.5.2.classpath"/>
+    <path refid="library.maven:_com.google.errorprone:error_prone_annotations:2.2.0.classpath"/>
+    <path refid="library.maven:_com.google.j2objc:j2objc-annotations:1.1.classpath"/>
+    <path refid="library.maven:_org.codehaus.mojo:animal-sniffer-annotations:1.17.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-library:1.3.classpath"/>
+  </path>
+  
+  <path id="healthyhabits.runtime.module.classpath">
+    <pathelement location="${healthyhabits.testoutput.dir}"/>
+    <pathelement location="${healthyhabits.output.dir}"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:8.0.11.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:2.6.0.classpath"/>
+    <path refid="library.maven:_javax.servlet:javax.servlet-api:3.1.0.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:jsp-api:2.2.1-b03.classpath"/>
+    <path refid="library.maven:_jstl:jstl:1.2.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.17.classpath"/>
+    <path refid="library.maven:_org.mockito:mockito-all:1.9.5.classpath"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:27.0-jre.classpath"/>
+    <path refid="library.maven:_com.google.guava:failureaccess:1.0.classpath"/>
+    <path refid="library.maven:_com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.2.classpath"/>
+    <path refid="library.maven:_org.checkerframework:checker-qual:2.5.2.classpath"/>
+    <path refid="library.maven:_com.google.errorprone:error_prone_annotations:2.2.0.classpath"/>
+    <path refid="library.maven:_com.google.j2objc:j2objc-annotations:1.1.classpath"/>
+    <path refid="library.maven:_org.codehaus.mojo:animal-sniffer-annotations:1.17.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-library:1.3.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.healthyhabits">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.healthyhabits">
+    <patternset refid="excluded.from.module.healthyhabits"/>
+  </patternset>
+  
+  <path id="healthyhabits.module.sourcepath">
+    <dirset dir="${module.healthyhabits.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.healthyhabits" depends="compile.module.healthyhabits.production,compile.module.healthyhabits.tests" description="Compile module healthyhabits"/>
+  
+  <target name="compile.module.healthyhabits.production" depends="register.custom.compilers" description="Compile module healthyhabits; production classes">
+    <mkdir dir="${healthyhabits.output.dir}"/>
+    <javac2 destdir="${healthyhabits.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.healthyhabits}/javac">
+      <compilerarg line="${compiler.args.healthyhabits}"/>
+      <bootclasspath refid="healthyhabits.module.bootclasspath"/>
+      <classpath refid="healthyhabits.module.production.classpath"/>
+      <src refid="healthyhabits.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.healthyhabits"/>
+    </javac2>
+    
+    <copy todir="${healthyhabits.output.dir}">
+      <fileset dir="${module.healthyhabits.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.healthyhabits.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.healthyhabits.tests" depends="register.custom.compilers,compile.module.healthyhabits.production" description="compile module healthyhabits; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.healthyhabits" description="cleanup module">
+    <delete dir="${healthyhabits.output.dir}"/>
+    <delete dir="${healthyhabits.testoutput.dir}"/>
+  </target>
+</project>

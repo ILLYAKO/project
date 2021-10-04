@@ -1,4 +1,3 @@
-<% System.out.println("Home Page."); %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
@@ -7,7 +6,8 @@
         <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
        <%-- <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">     --%>
 
-       <link href="public/css/style.css" rel="stylesheet">
+       <!--<link href="public/css/style.css" rel="stylesheet">-->
+        <link href="./static/css/style.css" rel="stylesheet">
 
     </head>
     <body>

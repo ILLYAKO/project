@@ -1,6 +1,7 @@
 package repository;
 
 import domain.ComplaintPart;
+import domain.User;
 import exception.InfrastructureException;
 
 import java.sql.*;
@@ -12,10 +13,6 @@ public class ComplaintPartRepository extends BaseRepository<ComplaintPart> {
 
     private static final String LOG_ERROR_MSG = "Error during the complaintPart %s";
 
-    /**
-     * Add ComplaintPart
-     * @param complaintPart
-     */
     public void add(ComplaintPart complaintPart) {
 
         Connection conn = openConnection();
@@ -43,11 +40,6 @@ public class ComplaintPartRepository extends BaseRepository<ComplaintPart> {
         }
     }
 
-    /**
-     * Modify ComplaintPart
-     * @param complaintPart
-     * @throws Exception
-     */
     public void modify(ComplaintPart complaintPart){
 
         Connection conn = openConnection();
@@ -79,11 +71,6 @@ public class ComplaintPartRepository extends BaseRepository<ComplaintPart> {
         }
     }
 
-    /**
-     * Remove ComplaintPart
-     * @param complaintPart
-     * @throws Exception
-     */
     public void remove(ComplaintPart complaintPart) {
 
         Connection conn = openConnection();
@@ -110,11 +97,6 @@ public class ComplaintPartRepository extends BaseRepository<ComplaintPart> {
         }
     }
 
-    /**
-     * Find ComplaintPart By ID
-     * @param id
-     * @return
-     */
     public Optional<ComplaintPart> findById(String id){
 
         ComplaintPart wantedComplaintPart = null;
@@ -152,11 +134,6 @@ public class ComplaintPartRepository extends BaseRepository<ComplaintPart> {
         return Optional.empty();
     }
 
-    /**
-     * Find ComplaintPart By Criteria
-     * @param criteria
-     * @return
-     */
     public Optional<ComplaintPart> findByCriteria(String field, String criteria){
 
         ComplaintPart wantedComplaintPart = null;
@@ -166,50 +143,35 @@ public class ComplaintPartRepository extends BaseRepository<ComplaintPart> {
         try
         {
             log("Creating prepared statement...");
-            //String SQL = "SELECT * FROM complaintParts WHERE complaintPart_complaintPartname =?";
             String SQL = "SELECT * FROM problematicparts WHERE " + field + "=?";
 
             PreparedStatement pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1,criteria);
 
             ResultSet rs = pstmt.executeQuery();
-            System.out.println("ComplaintPartRepository.findByCriteria -01");
 
             if(rs.next()) //while(rs.next())
             {
                 // from DB
-                System.out.println("ComplaintPartRepository.findByCriteria -02");
                 wantedComplaintPart= new ComplaintPart(
                         rs.getString("problematicpart_id"),
                         rs.getString("problemtype_id"),
                         rs.getString("problematicpart_name"),
                         rs.getString("problematicpart_description")
                 );
-                System.out.println("ComplaintPartRepository.findByCriteria -03");
-                System.out.println("ComplaintPartRepository.findByCriteria wantedComplaintPart.getComplaintPartEmail: "
-                        + wantedComplaintPart.getComplaintPartName());
 
                 return Optional.of(wantedComplaintPart);
             }
         }catch(SQLException se){
-            System.out.println("ComplaintPartRepository.findByCriteria -04");
             log(se.getMessage());
             logger.error(String.format(LOG_ERROR_MSG, "findById"), se);
             throw new InfrastructureException(String.format(LOG_ERROR_MSG, "findById"), se);
         }finally{
-            System.out.println("ComplaintPartRepository.findByCriteria -05");
             closeConnection(conn);
         }
-        System.out.println("ComplaintPartRepository.findByCriteria -06");
         return Optional.empty();
     }
 
-
-
-    /**
-     * Find All ComplaintParts
-     * @return
-     */
     public List<ComplaintPart> findAll(){
         List<ComplaintPart> complaintParts = new ArrayList<>();
 
@@ -246,5 +208,10 @@ public class ComplaintPartRepository extends BaseRepository<ComplaintPart> {
             closeConnection(conn);
         }
         return complaintParts;
+    }
+
+    @Override
+    public List<ComplaintPart> findAllComplaintOfUser(User user) {
+        return null;
     }
 }

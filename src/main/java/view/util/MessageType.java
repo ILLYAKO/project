@@ -7,7 +7,6 @@ public enum MessageType {
     SUCCESS("alert-success"),
     INFO("alert-info");
 
-
     private String reference;
 
     MessageType(String reference) {

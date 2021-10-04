@@ -1,6 +1,7 @@
 package repository;
 
 import domain.ComplaintType;
+import domain.User;
 import exception.InfrastructureException;
 
 import java.sql.*;
@@ -12,9 +13,6 @@ public class ComplaintTypeRepository extends BaseRepository<ComplaintType> {
 
     private static final String LOG_ERROR_MSG = "Error during the complaintType %s";
 
-    /**
-     *
-     */
     public void add(ComplaintType complaintType) {
 
         Connection conn = openConnection();
@@ -42,11 +40,6 @@ public class ComplaintTypeRepository extends BaseRepository<ComplaintType> {
         }
     }
 
-    /**
-     * Modify ComplaintType
-     * @param complaintType
-     * @throws Exception
-     */
     public void modify(ComplaintType complaintType){
 
         Connection conn = openConnection();
@@ -76,11 +69,6 @@ public class ComplaintTypeRepository extends BaseRepository<ComplaintType> {
         }
     }
 
-    /**
-     * Remove ComplaintType
-     * @param complaintType
-     * @throws Exception
-     */
     public void remove(ComplaintType complaintType) {
 
         Connection conn = openConnection();
@@ -107,11 +95,6 @@ public class ComplaintTypeRepository extends BaseRepository<ComplaintType> {
         }
     }
 
-    /**
-     * Find ComplaintType By ID
-     * @param id
-     * @return
-     */
     public Optional<ComplaintType> findById(String id){
 
         ComplaintType wantedComplaintType = null;
@@ -148,11 +131,6 @@ public class ComplaintTypeRepository extends BaseRepository<ComplaintType> {
         return Optional.empty();
     }
 
-    /**
-     * Find ComplaintType By Criteria
-     * @param criteria
-     * @return
-     */
     public Optional<ComplaintType> findByCriteria(String field, String criteria){
 
         ComplaintType wantedComplaintType = null;
@@ -162,49 +140,33 @@ public class ComplaintTypeRepository extends BaseRepository<ComplaintType> {
         try
         {
             log("Creating prepared statement...");
-            //String SQL = "SELECT * FROM complaintTypes WHERE complaintType_complaintTypename =?";
             String SQL = "SELECT * FROM problemtypes WHERE "+field+"=?";
 
             PreparedStatement pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1,criteria);
 
             ResultSet rs = pstmt.executeQuery();
-            System.out.println("ComplaintTypeRepository.findByCriteria -01");
 
-            if(rs.next()) //while(rs.next())
+            if(rs.next())
             {
                 // from DB
-                System.out.println("ComplaintTypeRepository.findByCriteria -02");
                 wantedComplaintType= new ComplaintType(rs.getString("problemtype_id"),
                                     rs.getString("problemtype_shortname"),
                                     rs.getString("problemtype_fullname"),
                                     rs.getString("problemtype_description")
                 );
-                System.out.println("ComplaintTypeRepository.findByCriteria -03");
-                System.out.println("ComplaintTypeRepository.findByCriteria wantedComplaintType.getComplaintTypeEmail: "
-                        + wantedComplaintType.getComplaintTypeShortName());
-
                 return Optional.of(wantedComplaintType);
             }
         }catch(SQLException se){
-            System.out.println("ComplaintTypeRepository.findByCriteria -04");
             log(se.getMessage());
             logger.error(String.format(LOG_ERROR_MSG, "findByCriteria"), se);
             throw new InfrastructureException(String.format(LOG_ERROR_MSG, "findByCriteria"), se);
         }finally{
-            System.out.println("ComplaintTypeRepository.findByCriteria -05");
             closeConnection(conn);
         }
-        System.out.println("ComplaintTypeRepository.findByCriteria -06");
         return Optional.empty();
     }
 
-
-
-    /**
-     * Find All ComplaintTypes
-     * @return
-     */
     public List<ComplaintType> findAll(){
         List<ComplaintType> complaintTypes = new ArrayList<>();
 
@@ -240,5 +202,10 @@ public class ComplaintTypeRepository extends BaseRepository<ComplaintType> {
             closeConnection(conn);
         }
         return complaintTypes;
+    }
+
+    @Override
+    public List<ComplaintType> findAllComplaintOfUser(User user) {
+        return null;
     }
 }

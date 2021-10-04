@@ -16,7 +16,7 @@ public abstract class BaseRepository<T> implements Repository<T> {
 
     protected void closeConnection(Connection conn){
         try {
-            log("Goodbye!");
+            //log("Goodbye!");
             conn.close();
         }catch (SQLException se){
             log("Problems during close connection");
@@ -25,7 +25,7 @@ public abstract class BaseRepository<T> implements Repository<T> {
     }
 
     protected Connection openConnection() {
-        log("Connecting to database...");
+        //log("Connecting to database...");
         Connection connection;
         try {
             connection = DriverManager.getConnection(DB_URL, USER , PASS);
@@ -34,7 +34,7 @@ public abstract class BaseRepository<T> implements Repository<T> {
                 log("Failed to make connection!");
                 logger.error("Failed to make connection!");
             }else {
-                log("Connection Successful! Enjoy. Now it's time to use data");
+                //log("Connection Successful! Enjoy. Now it's time to use data");
             }
 
         } catch (SQLException se) {
