@@ -24,4 +24,4 @@ answer list page and etc. There are Model-View-Controller Patter on the Java bac
 ![healthyhabits](./screenshots/schedule.jpg)
 
 ## Progress page
-![healthyhabits](./screenshots/progress.jpg)
+![healthyhabits](./screenshots/progress1.jpg)
