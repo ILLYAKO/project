@@ -12,16 +12,16 @@ answer list page and etc. There are Model-View-Controller Patter on the Java bac
 ![healthyhabits](./screenshots/registration.jpg)
 
 ## Login page
-![healthyhabits](./screenshots/login1.jpg)
+![healthyhabits](./screenshots/login.jpg)
 
 ## Complaints page
 ![healthyhabits](./screenshots/complaints.jpg)
 
 ## Advice page
-![healthyhabits](./screenshots/advices1.jpg)
+![healthyhabits](./screenshots/advices.jpg)
 
 ## Schedule page
-![healthyhabits](./screenshots/schedule1.jpg)
+![healthyhabits](./screenshots/schedule.jpg)
 
 ## Progress page
-![healthyhabits](./screenshots/progress1.jpg)
+![healthyhabits](./screenshots/progress.jpg)
