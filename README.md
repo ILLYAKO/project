@@ -1,26 +1,26 @@
-##Healthy Habits
+# **Healthy Habits**
 
 Main idea of project is to help people create healthy habits.
 The multi-pages project has a front end with welcome page, registration form, sign in, request form,
 answer list page and etc. There are Model-View-Controller Patter on the Java back end and connection to the MySQL database.
 
-#Home page
+## Home page
 ![healthyhabits](./screenshots/home.jpg)
 
-#Registration page
+## Registration page
 ![healthyhabits](./screenshots/registration.jpg)
 
-#Login page
+## Login page
 ![healthyhabits](./screenshots/login.jpg)
 
-#Complaints page
+## Complaints page
 ![healthyhabits](./screenshots/complaints.jpg)
 
-#Advice page
+## Advice page
 ![healthyhabits](./screenshots/advice.jpg)
 
-#Schedule page
+## Schedule page
 ![healthyhabits](./screenshots/schedule.jpg)
 
-#Progress page
+## Progress page
 ![healthyhabits](./screenshots/progress.jpg)
